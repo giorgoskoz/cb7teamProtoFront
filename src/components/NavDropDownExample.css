@@ -1,0 +1,17 @@
+/* #Navbar {
+    background: white;
+} */
+
+#NavbarBrand {
+    font-size: 35px;
+}
+
+img {
+    width: 20%;
+    height: 20%
+}
+
+#Link, #nav-dropdown {
+    color: white;
+    font-size: 25px;
+}

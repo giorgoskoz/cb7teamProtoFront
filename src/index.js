@@ -4,7 +4,21 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const loggedUser = {
+    token: localStorage.getItem( 'token' ),
+    // token: "token",
+    user: localStorage.getItem( 'user' )
+    // user: {
+    //     "username": "mpazarlis",
+    //     "firstname": "Mike",
+    //     "lastname": "lastname",
+    //     "email": "email",
+    //     "profilepiclink": "profilepiclink",
+    //     "role": "role"
+    //     }
+}
+
+ReactDOM.render(<App loggedUser = { loggedUser } />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

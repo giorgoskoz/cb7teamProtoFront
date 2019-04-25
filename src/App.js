@@ -1,28 +1,133 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import NavDropdownExample from './components/NavDropdownExample';
+import Gear from './components/Gear';
+import Calendar from './components/Calendar';
+import Home from './components/Home';
 import './App.css';
+import { GlobalProvider } from './components/GlobalContext';
+import { Navbar } from "react-bootstrap";
+import NavbarStranger from "./components/Navbar";
+import RegisterModal from "./components/RegisterModal";
+import LoginModal from "./components/LoginModal";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 
-class App extends Component {
-  render() {
+library.add(faUser);
+library.add(faLock);
+
+class App extends React.Component {
+
+  constructor( props ) {
+    super(props);
+    let user;
+    ((this.props.loggedUser.user === null) ?  user = {
+      username: "",
+        firstname: "",
+        lastname: "",
+        email: "",
+        role: ""
+                      } : user = this.props.loggedUser.user);
+    this.state = {
+      token: this.props.loggedUser.token,
+      user: user,
+      setToken: ( token ) => this.setState({
+        token: token
+      }),
+      setUser: ( user ) => this.setState({
+        user: user
+      }),
+      showLoginModal: false,
+      showRegisterModal: false,
+      setShowLoginModal: ( value ) => this.setState({
+        showLoginModal: value
+      }),
+      setShowRegisterModal: ( value ) => this.setState({
+        showRegisterModal: value
+      })
+    };
+  }
+
+  welcome(){
+    if(( this.state.token === null ) || (this.state.token === undefined)){
+      return(
+        <NavbarStranger></NavbarStranger>
+      );
+    } else {
+      return(
+        <NavDropdownExample/>
+      )
+    }
+  }
+
+  render(){
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <GlobalProvider value = { this.state }>
+        <Router>
+          <div id="forBackgroundImg">
+            <LoginModal></LoginModal>
+            <RegisterModal></RegisterModal>
+            <NavDropdownExample></NavDropdownExample>
+    
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/calendar" component={Calendar} />
+            <Route path="/gear" component={Gear} />
+            <Route path="/crew" component={Topics} />
+          </div>
+        </Router>
+      </GlobalProvider>
     );
   }
+}
+
+function About() {
+  return <h2>About</h2>;
+}
+
+function Topic({ match }) {
+  return <h3>Requested Param: {match.params.id}</h3>;
+}
+
+function Topics({ match }) {
+  return (
+    <div>
+      <h2>Topics</h2>
+
+      <ul>
+        <li>
+          <Link to={`${match.url}/components`}>Components</Link>
+        </li>
+        <li>
+          <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
+        </li>
+      </ul>
+
+      <Route path={`${match.path}/:id`} component={Topic} />
+      <Route
+        exact
+        path={match.path}
+        render={() => <h3>Please select a topic.</h3>}
+      />
+    </div>
+  );
+}
+
+function Header() {
+  return (
+    <ul>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/about">About</Link>
+      </li>
+      <li>
+        <Link to="/topics">Topics</Link>
+      </li>
+    </ul>
+  );
 }
 
 export default App;
