@@ -22,7 +22,7 @@ class App extends React.Component {
   constructor( props ) {
     super(props);
     let user;
-    ((this.props.loggedUser.user === null) ?  user = {
+    (((this.props.loggedUser.user === null) || (this.props.loggedUser.user === undefined)) ?  user = {
       username: "",
         firstname: "",
         lastname: "",
@@ -48,6 +48,19 @@ class App extends React.Component {
       })
     };
   }
+
+  // componentDidMount(){
+  //   let user;
+  //   ((this.props.loggedUser.user === null) ?  user = {
+  //     username: "",
+  //       firstname: "",
+  //       lastname: "",
+  //       email: "",
+  //       role: ""
+  //                     } : user = localStorage.getItem( 'user' ));
+  //   this.setState( {user: user} );
+  //   this.setState( {token: localStorage.getItem( 'token' )} );
+  // }
 
   welcome(){
     if(( this.state.token === null ) || (this.state.token === undefined)){

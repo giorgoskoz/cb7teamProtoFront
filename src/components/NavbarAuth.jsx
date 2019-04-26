@@ -13,6 +13,7 @@ class NavbarAuth extends React.Component {
 
         this.handleShowLoginModal = this.handleShowLoginModal.bind(this);
         this.handleShowRegisterModal = this.handleShowRegisterModal.bind(this);
+        this.doLogout = this.doLogout.bind(this);
 
         this.state = {
             showLoginModal: false,
@@ -30,6 +31,23 @@ class NavbarAuth extends React.Component {
         this.context.setShowRegisterModal( true );
     }
 
+    doLogout(){
+        this.context.setToken( null );
+        this.context.setUser( {
+            username: "",
+              firstname: "",
+              lastname: "",
+              email: "",
+              role: ""
+                            } );
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        localStorage.removeItem("firstname");
+        localStorage.removeItem("lastname");
+        localStorage.removeItem("email");
+        localStorage.removeItem("role");
+    }
+
     logged() {
         console.log(this.context.token);
         return (
@@ -40,7 +58,7 @@ class NavbarAuth extends React.Component {
                     Something else here
                         </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item eventKey="4.4">Logout</NavDropdown.Item>
+                <NavDropdown.Item eventKey="4.4" onClick={ this.doLogout }>Logout</NavDropdown.Item>
             </NavDropdown>
         );
     }

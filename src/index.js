@@ -7,13 +7,18 @@ import * as serviceWorker from './serviceWorker';
 const loggedUser = {
     token: localStorage.getItem( 'token' ),
     // token: "token",
-    user: localStorage.getItem( 'user' )
+    user: {
+        "username": localStorage.getItem("username"),
+        "firstname": localStorage.getItem("firstname"),
+        "lastname": localStorage.getItem("lastname"),
+        "email": localStorage.getItem("email"),
+        "role": localStorage.getItem("role")
+    }
     // user: {
     //     "username": "mpazarlis",
     //     "firstname": "Mike",
     //     "lastname": "lastname",
     //     "email": "email",
-    //     "profilepiclink": "profilepiclink",
     //     "role": "role"
     //     }
 }
