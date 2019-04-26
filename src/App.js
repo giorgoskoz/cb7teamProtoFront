@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import NavDropdownExample from './components/NavDropdownExample';
 import Gear from './components/Gear';
 import Calendar from './components/Calendar';
+import CalendarTest from './components/CalendarTest';
 import Home from './components/Home';
 import './App.css';
 import { GlobalProvider } from './components/GlobalContext';
@@ -88,6 +89,7 @@ class App extends React.Component {
             <Route path="/calendar" component={Calendar} />
             <Route path="/gear" component={Gear} />
             <Route path="/crew" component={Topics} />
+            <Route path="/ctest" component={CalendarTest} />
           </div>
         </Router>
       </GlobalProvider>
