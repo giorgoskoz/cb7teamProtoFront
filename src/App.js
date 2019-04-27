@@ -13,10 +13,12 @@ import RegisterModal from "./components/RegisterModal";
 import LoginModal from "./components/LoginModal";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faLock, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faUser);
 library.add(faLock);
+library.add(faArrowLeft);
+library.add(faArrowRight);
 
 class App extends React.Component {
 
@@ -49,20 +51,7 @@ class App extends React.Component {
       })
     };
   }
-
-  // componentDidMount(){
-  //   let user;
-  //   ((this.props.loggedUser.user === null) ?  user = {
-  //     username: "",
-  //       firstname: "",
-  //       lastname: "",
-  //       email: "",
-  //       role: ""
-  //                     } : user = localStorage.getItem( 'user' ));
-  //   this.setState( {user: user} );
-  //   this.setState( {token: localStorage.getItem( 'token' )} );
-  // }
-
+  
   welcome(){
     if(( this.state.token === null ) || (this.state.token === undefined)){
       return(
@@ -126,22 +115,6 @@ function Topics({ match }) {
         render={() => <h3>Please select a topic.</h3>}
       />
     </div>
-  );
-}
-
-function Header() {
-  return (
-    <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/about">About</Link>
-      </li>
-      <li>
-        <Link to="/topics">Topics</Link>
-      </li>
-    </ul>
   );
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Col, Row, Jumbotron } from 'react-bootstrap';
 import moment from 'moment';
 import './CalendarTest.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class CalendarTest extends React.Component{
 
@@ -43,15 +44,16 @@ class CalendarTest extends React.Component{
 
     dailySchedule2 ( date, j ){
         let timeslots = ["Morning", "Midday", "Afternoon", "Night"];
-        let timeslotList = [<div className="row dayWordBox" bsClass="dayWordBox" style={{border: "2px solid black"}}><b>{moment( date ).format()}</b></div>];
+        let timeslotList = [<div className="row justify-content-center d-flex align-items-center dayWordBox mb-0"><b>{moment( date ).format("dddd")}</b>{"\n"}</div>];
+        timeslotList.push( <div className="row justify-content-center d-flex align-items-center mb-2"><small>{moment( date ).format("DD / MM")}</small></div>);
         for(let i = 0; i<timeslots.length ; i++){
             let unique = moment(this.state.baseDate).format() + " " + timeslots[i];
             console.log(unique);
-            let timeslotRow = <div id={unique} className="row dailyBox">{timeslots[i]}</div>
+            let timeslotRow = <div id={unique} className="row justify-content-center d-flex align-items-center dailyBox">{timeslots[i]}</div>
             timeslotList.push(timeslotRow)
         };
         
-        return <div style={{border: "2px solid black"}} className="col-md-2 col-4">{ timeslotList }</div>;
+        return <div className="col-md-2 col-4">{ timeslotList }</div>;
     }
 
     handlePrev(){
@@ -73,12 +75,12 @@ class CalendarTest extends React.Component{
             <Row className="justify-content-center whiteBgHere">
                     <Col align-center className="col-12 col-md-10" align="center">
                         <Container className="mt-5">
-                            <Row style={{border: "2px solid black"}}>
-                                <Col style={{border: "2px solid black"}} onClick={ this.handlePrev }>prev</Col>
-                                <Col className="col-6 col-md-8" style={{border: "2px solid black"}} >This week<br></br> from { moment(this.state.baseDate).format()  } to </Col>
-                                <Col style={{border: "2px solid black"}} onClick={ this.handleNext }>Next</Col>
+                            <Row className="mb-4">
+                                <Col  className="calendarNav justify-content-center d-flex align-items-center" onClick={ this.handlePrev }><i class="far fa-arrow-alt-circle-left"></i></Col>
+                                <Col className="col-6 col-md-8 calendarHead">This "week"<br></br> from { moment(this.state.baseDate).format("DD / MM")  } to { moment(this.state.baseDate).add(6, 'days').format("DD / MM")  }</Col>
+                                <Col className="calendarNav justify-content-center d-flex align-items-center" onClick={ this.handleNext }><i class="far fa-arrow-alt-circle-right"></i></Col>
                             </Row>
-                            <Row style={{border: "2px solid black"}}>
+                            <Row>
                                 {this.sixDays( this.state.baseDate )}
                             </Row>
                             <Row className="justify-content-center">For appointments on the same day <br></br><br></br><a href="#">contact us</a></Row>
