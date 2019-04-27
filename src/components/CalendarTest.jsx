@@ -76,7 +76,7 @@ class CalendarTest extends React.Component{
                         <Container className="mt-5">
                             <Row style={{border: "2px solid black"}}>
                                 <Col style={{border: "2px solid black"}}>prev</Col>
-                                <Col xs={8} style={{border: "2px solid black"}} >This week<br></br> from { this.state.baseDay } to </Col>
+                                <Col className="col-4 col-md-8" style={{border: "2px solid black"}} >This week<br></br> from { this.state.baseDay } to </Col>
                                 <Col style={{border: "2px solid black"}}>Next</Col>
                             </Row>
                             <Row style={{border: "2px solid black"}}>
