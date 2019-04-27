@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Col, Row, Jumbotron } from 'react-bootstrap';
-import Moment from 'react-moment';
+import moment from 'moment';
 import './CalendarTest.css';
 
 class CalendarTest extends React.Component{
@@ -9,14 +9,14 @@ class CalendarTest extends React.Component{
     constructor( props ){
         super(props);
         this.state = {
-            baseDate: new Date(),
-            baseDay: (new Date()).getDate()
+            baseDate: moment().add(1, "day")
         }
 
         this.dayWithWords = this.dayWithWords.bind(this);
-        // this.dailySchedule = this.dailySchedule.bind(this);
         this.dailySchedule2 = this.dailySchedule2.bind(this);
         this.sixDays = this.sixDays.bind(this);
+        this.handlePrev = this.handlePrev.bind(this);
+        this.handleNext = this.handleNext.bind(this);
     }
 
     dayWithWords( dayNo ) {
@@ -35,32 +35,17 @@ class CalendarTest extends React.Component{
     sixDays( date ){
         let sixDaysCols = [];
         for(let i = 0; i < 6; i++){
-            let nextDay = new Date();
-            nextDay.setDate(date.getDate()+i);
-            let sixDaysCol = this.dailySchedule2( nextDay, (i+1) );
+            let sixDaysCol = this.dailySchedule2( moment(this.state.baseDate).add(i, 'day') );
             sixDaysCols.push(sixDaysCol);
         };
         return sixDaysCols;
     }
 
-    // dailySchedule ( date, j ){
-    //     let timeslots = ["Morning", "Midday", "Afternoon", "Night"];
-    //     let timeslotList = [<Row bsClass="dayWordBox" style={{border: "2px solid black"}}><b>{this.dayWithWords(date.getDay() + j)}</b></Row>];
-    //     for(let i = 0; i<=timeslots.length ; i++){
-    //         let timeslotRow = <Row style={{border: "2px solid black"}} className="dailyBox">{timeslots[i]}</Row>
-    //             timeslotList.push(timeslotRow)
-    //     };
-        
-    //     return <Col style={{border: "2px solid black"}} className="col-2">{ timeslotList }</Col>;
-    // }
-
     dailySchedule2 ( date, j ){
         let timeslots = ["Morning", "Midday", "Afternoon", "Night"];
-        let timeslotList = [<div className="row dayWordBox" bsClass="dayWordBox" style={{border: "2px solid black"}}><b>{this.dayWithWords(date.getDay() + 1)}</b></div>];
+        let timeslotList = [<div className="row dayWordBox" bsClass="dayWordBox" style={{border: "2px solid black"}}><b>{moment( date ).format()}</b></div>];
         for(let i = 0; i<timeslots.length ; i++){
-            let nextDay = new Date();
-            nextDay.setDate(date.getDate()+1)
-            let unique = nextDay.toString() + timeslots[i];
+            let unique = moment(this.state.baseDate).format() + " " + timeslots[i];
             console.log(unique);
             let timeslotRow = <div id={unique} className="row dailyBox">{timeslots[i]}</div>
             timeslotList.push(timeslotRow)
@@ -69,26 +54,32 @@ class CalendarTest extends React.Component{
         return <div style={{border: "2px solid black"}} className="col-md-2 col-4">{ timeslotList }</div>;
     }
 
+    handlePrev(){
+        console.log('clank');
+        console.log(this.state.baseDate);
+        this.setState({baseDate: moment( this.state.baseDate ).subtract( 6, 'days' )});
+        console.log(this.state.baseDate);
+    }
+
+    handleNext(){
+        console.log('clank');
+        console.log(this.state.baseDate);
+        this.setState({baseDate: moment( this.state.baseDate ).add( 6, 'days' )});
+        console.log(this.state.baseDate);
+    }
+
     render(){
         return(
             <Row className="justify-content-center whiteBgHere">
                     <Col align-center className="col-12 col-md-10" align="center">
                         <Container className="mt-5">
                             <Row style={{border: "2px solid black"}}>
-                                <Col style={{border: "2px solid black"}}>prev</Col>
-                                <Col className="col-4 col-md-8" style={{border: "2px solid black"}} >This week<br></br> from { this.state.baseDay } to </Col>
-                                <Col style={{border: "2px solid black"}}>Next</Col>
+                                <Col style={{border: "2px solid black"}} onClick={ this.handlePrev }>prev</Col>
+                                <Col className="col-6 col-md-8" style={{border: "2px solid black"}} >This week<br></br> from { moment(this.state.baseDate).format()  } to </Col>
+                                <Col style={{border: "2px solid black"}} onClick={ this.handleNext }>Next</Col>
                             </Row>
                             <Row style={{border: "2px solid black"}}>
-                                {/* <Col style={{border: "2px solid black"}} className="col-2">
-                                    <Row style={{border: "2px solid black"}}><b>{this.dayWithWords(this.state.baseDate.getDay())}</b></Row>
-                                    <Row style={{border: "2px solid black"}}>Morning</Row>
-                                    <Row style={{border: "2px solid black"}}>Midday</Row>
-                                    <Row style={{border: "2px solid black"}}>Afternoon</Row>
-                                    <Row style={{border: "2px solid black"}}>Night</Row>
-                                </Col>
-                                    {this.dailySchedule( this.state.baseDate, 1)} */}
-                                {this.sixDays( this.state.baseDate)}
+                                {this.sixDays( this.state.baseDate )}
                             </Row>
                             <Row className="justify-content-center">For appointments on the same day <br></br><br></br><a href="#">contact us</a></Row>
                         </Container>
