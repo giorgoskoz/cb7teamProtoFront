@@ -2,6 +2,7 @@ import React from 'react';
 // import dateFns from 'date-fns';
 import { Container, Col, Row, Jumbotron } from 'react-bootstrap';
 import { GlobalContext } from './GlobalContext';
+import CalendarTest from './CalendarTest';
 // import './Calendar.css';
 
 class Calendar extends React.Component {
@@ -44,7 +45,8 @@ class Calendar extends React.Component {
                     </p>
                     </Container>
                 </Jumbotron>
-                <Row className="justify-content-center whiteBgHere">
+                <CalendarTest></CalendarTest>
+                {/* <Row className="justify-content-center whiteBgHere">
                     <Col align-center className="col-10" align="center">
                         <Container className="mt-5">
                             <Row style={{border: "2px solid black"}}>
@@ -88,7 +90,7 @@ class Calendar extends React.Component {
                             <br></br>
                         </Container>
                     </Col>
-                </Row>
+                </Row> */}
             </div>
         )
     }
