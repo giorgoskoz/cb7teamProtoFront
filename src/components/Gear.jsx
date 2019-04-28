@@ -2,6 +2,7 @@ import React from 'react';
 import { Jumbotron, Container, Row, Col, CardDeck, Tabs, Tab, Sonnet } from 'react-bootstrap';
 import GearCard from './GearCard';
 import './Gear.css';
+import DisplayPic from './DisplayPic';
 
 class Gear extends React.Component {
 
@@ -10,6 +11,7 @@ class Gear extends React.Component {
             <div>
                 <Jumbotron fluid className="mb-0 here">
                     <Container>
+                        <DisplayPic></DisplayPic>
                         <h1>Check the goods</h1>
                         <p>
                             A selection of lights and photography paraphernalia are provided with the studio, and cameras as well as lenses are available to rent.

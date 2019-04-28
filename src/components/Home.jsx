@@ -3,6 +3,7 @@ import { Jumbotron, Container, Button, Row } from 'react-bootstrap';
 import { Route, Redirect } from 'react-router';
 import Calendar from './Calendar';
 import './Home.css';
+import DisplayPic from './DisplayPic';
 
 class Home extends React.Component {
 
@@ -29,13 +30,11 @@ class Home extends React.Component {
             <div>
                 <Jumbotron id="here" fluid className="mb-0">
                     <Container>
+                    <DisplayPic></DisplayPic>
                         <h1>We've got the spot, if you've got the coin</h1>
                         <p>
                             Welcome, make yourself at home.
                     </p>
-                    <br></br>
-                    <br></br>
-                    <br></br>
                     <br></br>
                     <br></br>
                     <br></br>
