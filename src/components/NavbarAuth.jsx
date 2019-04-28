@@ -51,7 +51,7 @@ class NavbarAuth extends React.Component {
     logged() {
         console.log(this.context.token);
         return (
-            <NavDropdown title={this.context.user.username} id="nav-dropdown" alignRight className="mx-3">
+            <NavDropdown title={this.context.user.username} id="nav-dropdown" alignRight="true" className="mx-3 d-flex align-items-center">
                 <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
                 <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>
                 <NavDropdown.Item eventKey="4.3">
@@ -66,11 +66,11 @@ class NavbarAuth extends React.Component {
     notLogged(){
         return(
             <React.Fragment>
-                <Navbar.Text>
-                    <span className="mr-2" onClick={this.handleShowLoginModal}>Login</span>
+                <Navbar.Text className="d-flex align-items-center">
+                    <a className="btn btn-outline-dark mr-2" onClick={this.handleShowLoginModal}>Login</a>
                 </Navbar.Text>
-                <Navbar.Text>
-                    <a onClick={this.handleShowRegisterModal} ><strong>Register</strong></a>
+                <Navbar.Text className="d-flex align-items-center">
+                    <a className="btn btn-outline-dark mr-2" onClick={this.handleShowRegisterModal} >Register</a>
                 </Navbar.Text>
             </React.Fragment>    
         );

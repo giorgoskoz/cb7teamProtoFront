@@ -2,11 +2,16 @@
     color: black;
 }
 
+.dailyBox:hover {
+    border-width: 5px;
+    cursor: pointer;
+}
+
 .dailyBox {
     min-height: 55px;
     border-style: solid;
     border-width: 1px;
-    border-color: rgb(87, 87, 87);
+    border-color: rgb(175,176,179);
     margin: 8px;
     border-radius: 8%;
 }
@@ -31,4 +36,9 @@
 
 .fa-arrow-alt-circle-left, .fa-arrow-alt-circle-right {
     font-size: 38px;
+}
+
+.fa-arrow-alt-circle-left:hover, .fa-arrow-alt-circle-right:hover {
+    font-size: 43px;
+    cursor: pointer;
 }

@@ -37,7 +37,7 @@ class NavDropdownExample extends React.Component {
                         <Link  id="Link" to="/gear">Gear</Link>
                     </Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
+                <Nav.Item className="mr-4">
                     <Nav.Link eventKey="3">
                         <Link  id="Link" to="/crew">The Crew</Link>
                     </Nav.Link>

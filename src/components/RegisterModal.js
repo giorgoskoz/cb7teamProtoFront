@@ -198,7 +198,7 @@ class RegisterModal extends Component {
                 </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={ this.props.handleCloseLoginModal }>
+              <Button variant="secondary" onClick={ this.handleCloseRegisterModal }>
                 Close
               </Button>
               <Button variant="primary" onClick={ this.handleSubmit }>
