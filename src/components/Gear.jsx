@@ -3,8 +3,31 @@ import { Jumbotron, Container, Row, Col, CardDeck, Tabs, Tab, Sonnet } from 'rea
 import GearCard from './GearCard';
 import './Gear.css';
 import DisplayPic from './DisplayPic';
+import Axios from 'axios';
 
 class Gear extends React.Component {
+
+    constructor( props ){
+        super( props );
+        this.state = {
+            providedGearList: []
+        }
+    }
+
+    fetchProvidedGear(){
+        Axios.get("urlGoesHere",
+        {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }
+        ).then( response => {
+            response.data.forEach( gear => {
+                console.log(gear);
+            });
+        })
+    }
 
     render() {
         return (
