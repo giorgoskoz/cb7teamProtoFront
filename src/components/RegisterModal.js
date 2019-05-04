@@ -51,12 +51,14 @@ class RegisterModal extends Component {
         console.log('ref to firstName: ', this.firstNameInput.current.value);
         console.log('ref to lastName: ', this.lastNameInput.current.value);
         console.log('ref to email: ', this.emailInput.current.value);
-        axios.post('testUrlHere',
+        // axios.post('testUrlHere',
+        axios.post('localhost:8080/register/save',
           {
             "username": this.usernameInput.current.value,
             "password": this.passwordInput.current.value,
             "firstName": this.firstNameInput.current.value,
             "lastName": this.lastNameInput.current.value,
+            "role": { id: 1 },
             "email": this.emailInput.current.value
           },
           {

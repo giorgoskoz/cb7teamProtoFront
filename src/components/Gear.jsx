@@ -25,6 +25,7 @@ class Gear extends React.Component {
         ).then( response => {
             response.data.forEach( gear => {
                 console.log(gear);
+                this.setState( { providedGearList: providedGearList.push(gear) } )
             });
         })
     }
