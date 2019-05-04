@@ -52,7 +52,7 @@ class RegisterModal extends Component {
         console.log('ref to lastName: ', this.lastNameInput.current.value);
         console.log('ref to email: ', this.emailInput.current.value);
         // axios.post('testUrlHere',
-        axios.post('localhost:8080/register/save',
+        axios.post('http://localhost:8080/register/user',
           {
             "username": this.usernameInput.current.value,
             "password": this.passwordInput.current.value,
@@ -67,7 +67,23 @@ class RegisterModal extends Component {
               'Content-Type': 'application/json',
             }
           }
-        )
+        ).then( response => {
+          console.log( response.data );
+          this.context.setToken ( response.data.token );
+          this.context.setUser ( {
+          username: response.data.username,
+          firstname: response.data.firstname,
+          lastname: response.data.lastname,
+          email: response.data.email,
+          role: response.data.role
+        });
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('username', response.data.username);
+        localStorage.setItem('firstname', response.data.firstname);
+        localStorage.setItem('lastname', response.data.lastname);
+        localStorage.setItem('email', response.data.email);
+        localStorage.setItem('role', response.data.role);
+        })
       }
     }
   
