@@ -44,16 +44,21 @@ class CalendarTest extends React.Component{
 
     dailySchedule2 ( date, j ){
         let timeslots = ["Morning", "Midday", "Afternoon", "Night"];
-        let timeslotList = [<div className="row justify-content-center d-flex align-items-center dayWordBox mb-0"><b>{moment( date ).format("dddd")}</b>{"\n"}</div>];
-        timeslotList.push( <div className="row justify-content-center d-flex align-items-center mb-2"><small>{moment( date ).format("DD / MM")}</small></div>);
+        let timeslotsTimes = ["8", "12", "16", "20"];
+        let timeslotList = [<div key={ moment( date ).format("YYYY/MM/DD") } className="row justify-content-center d-flex align-items-center dayWordBox mb-0"><b>{moment( date ).format("dddd")}</b>{"\n"}</div>];
+        console.log( moment( date ).format("YYYY/MM/DD") );
+        timeslotList.push( <div key={ moment( date ).format("DD / MM") } className="row justify-content-center d-flex align-items-center mb-2"><small>{moment( date ).format("DD / MM")}</small></div>);
         for(let i = 0; i<timeslots.length ; i++){
-            let unique = moment(this.state.baseDate).format() + " " + timeslots[i];
+            let sessionDate = moment( date ).set({ hour: parseInt(timeslotsTimes[i], 10), minute: parseInt(0, 10) }).toDate();
+            let sessionDateEnd = moment ( sessionDate ).add(4, 'hours')
+            let unique = moment( sessionDate ).format() + " " + timeslots[i];
             console.log(unique);
-            let timeslotRow = <div id={unique} className="row justify-content-center d-flex align-items-center dailyBox">{timeslots[i]}</div>
+            console.log(moment( sessionDateEnd ).format());
+            let timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox">{timeslots[i]}</div>
             timeslotList.push(timeslotRow)
         };
         
-        return <div className="col-md-2 col-4">{ timeslotList }</div>;
+        return <div key={ moment( date ).format("YYYY/MM/DD") } className="col-md-2 col-4">{ timeslotList }</div>;
     }
 
     handlePrev(){
@@ -71,14 +76,15 @@ class CalendarTest extends React.Component{
     }
 
     render(){
+        console.log(moment(this.state.baseDate).format());
         return(
             <Row className="justify-content-center whiteBgHere">
-                    <Col align-center className="col-12 col-md-10" align="center">
+                    <Col className="col-12 col-md-10 align-center">
                         <Container className="mt-5">
                             <Row className="mb-4">
-                                <Col  className="calendarNav justify-content-center d-flex align-items-center" onClick={ this.handlePrev }><i class="far fa-arrow-alt-circle-left"></i></Col>
-                                <Col className="col-6 col-md-8 calendarHead">This "week"<br></br> from { moment(this.state.baseDate).format("DD / MM")  } to { moment(this.state.baseDate).add(6, 'days').format("DD / MM")  }</Col>
-                                <Col className="calendarNav justify-content-center d-flex align-items-center" onClick={ this.handleNext }><i class="far fa-arrow-alt-circle-right"></i></Col>
+                                <Col className="calendarNav justify-content-center d-flex align-items-center" onClick={ this.handlePrev }><i className="far fa-arrow-alt-circle-left"></i></Col>
+                                <Col className="col-6 col-md-8 justify-content-center d-flex align-items-center calendarHead">this "week"<br></br>from { moment(this.state.baseDate).format("DD / MM")  } to { moment(this.state.baseDate).add(6, 'days').format("DD / MM")  }</Col>
+                                <Col className="calendarNav justify-content-center d-flex align-items-center" onClick={ this.handleNext }><i className="far fa-arrow-alt-circle-right"></i></Col>
                             </Row>
                             <Row>
                                 {this.sixDays( this.state.baseDate )}
@@ -87,7 +93,7 @@ class CalendarTest extends React.Component{
                         </Container>
                     </Col>
                 </Row>
-        )
+        );
     }
 
 }

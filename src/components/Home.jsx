@@ -30,7 +30,7 @@ class Home extends React.Component {
             <div>
                 <Jumbotron id="here" fluid className="mb-0">
                     <Container>
-                    <DisplayPic></DisplayPic>
+                    {/* <DisplayPic></DisplayPic> */}
                         <h1>We've got the spot, if you've got the coin</h1>
                         <p>
                             Welcome, make yourself at home.

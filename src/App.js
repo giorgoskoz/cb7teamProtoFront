@@ -14,6 +14,7 @@ import LoginModal from "./components/LoginModal";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import Footer from './components/Footer';
 
 library.add(faUser);
 library.add(faLock);
@@ -51,7 +52,7 @@ class App extends React.Component {
       })
     };
   }
-  
+
   welcome(){
     if(( this.state.token === null ) || (this.state.token === undefined)){
       return(
@@ -79,6 +80,7 @@ class App extends React.Component {
             <Route path="/gear" component={Gear} />
             <Route path="/crew" component={Topics} />
             <Route path="/ctest" component={CalendarTest} />
+            <Footer></Footer>
           </div>
         </Router>
       </GlobalProvider>

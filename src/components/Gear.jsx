@@ -11,7 +11,7 @@ class Gear extends React.Component {
             <div>
                 <Jumbotron fluid className="mb-0 here">
                     <Container>
-                        <DisplayPic></DisplayPic>
+                        {/* <DisplayPic></DisplayPic> */}
                         <h1>Check the goods</h1>
                         <p>
                             A selection of lights and photography paraphernalia are provided with the studio, and cameras as well as lenses are available to rent.

@@ -1,4 +1,5 @@
 import React from 'react';
+import './DisplayPic.css';
 import aportrait1 from '../img/display-pics/aportrait1.JPG';
 import aportrait2 from '../img/display-pics/aportrait2.JPG';
 import aportrait3 from '../img/display-pics/aportrait3.JPG';
@@ -17,13 +18,13 @@ class DisplayPic extends React.Component {
 
     getDisplayPic(){
         let displayPics = [ aportrait1, aportrait2, aportrait3, aportrait4, aportrait5, aportrait6 ];
-        return displayPics[ this.getRandomInt( 0 , 5) ]
+        return displayPics[ this.getRandomInt( 0 , 6) ]
     }
 
     render(){
         return(
             <div>
-                <img src={ this.getDisplayPic() } className="mb-3"></img>
+                <img src={ this.getDisplayPic() } className="mb-3 displayPic"></img>
             </div>
         )
     }
