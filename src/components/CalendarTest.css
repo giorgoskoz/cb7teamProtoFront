@@ -4,7 +4,6 @@
 
 .dailyBox:hover {
     border-width: 5px;
-    cursor: pointer;
 }
 
 .dailyBox {
@@ -27,11 +26,12 @@
 }
 
 .available {
-
+    cursor: pointer
 }
 
 .booked {
-
+    background-color: rgb(175,176,179);
+    color: rgb(206, 206, 206);
 }
 
 .fa-arrow-alt-circle-left, .fa-arrow-alt-circle-right {

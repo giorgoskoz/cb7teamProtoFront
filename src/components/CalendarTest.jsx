@@ -12,33 +12,21 @@ class CalendarTest extends React.Component{
         super(props);
         this.state = {
             baseDate: moment().add(1, "day"),
-            sessionList: []
+            sessionList: [ { "date": "2019"} ]
         }
 
-        this.dayWithWords = this.dayWithWords.bind(this);
         this.dailySchedule2 = this.dailySchedule2.bind(this);
         this.sixDays = this.sixDays.bind(this);
         this.handlePrev = this.handlePrev.bind(this);
         this.handleNext = this.handleNext.bind(this);
-    }
-
-    dayWithWords( dayNo ) {
-        ((dayNo>6)? dayNo = dayNo - 7 : dayNo = dayNo)
-        var weekdays = new Array(7);
-        weekdays[0] = "Sunday";
-        weekdays[1] = "Monday";
-        weekdays[2] = "Tuesday";
-        weekdays[3] = "Wednesday";
-        weekdays[4] = "Thursday";
-        weekdays[5] = "Friday";
-        weekdays[6] = "Saturday";
-        return weekdays[dayNo];
+        this.getAvailableSessions = this.getAvailableSessions.bind(this);
+        this.handleSessionClick = this.handleSessionClick.bind(this);
     }
 
     sixDays( date ){
         let sixDaysCols = [];
         for(let i = 0; i < 6; i++){
-            let sixDaysCol = this.dailySchedule2( moment(this.state.baseDate).add(i, 'day') );
+            let sixDaysCol = this.dailySchedule2( moment( date ).add(i, 'day') );
             sixDaysCols.push(sixDaysCol);
         };
         return sixDaysCols;
@@ -51,16 +39,27 @@ class CalendarTest extends React.Component{
         console.log( moment( date ).format("YYYY/MM/DD") );
         timeslotList.push( <div key={ moment( date ).format("DD / MM") } className="row justify-content-center d-flex align-items-center mb-2"><small>{moment( date ).format("DD / MM")}</small></div>);
         for(let i = 0; i<timeslots.length ; i++){
-            let sessionDate = moment( date ).set({ hour: parseInt(timeslotsTimes[i], 10), minute: parseInt(0, 10) }).toDate();
+            let sessionDate = moment( date ).set({ hour: parseInt(timeslotsTimes[i]), minute: 0, second: 0});
             let sessionDateEnd = moment ( sessionDate ).add(4, 'hours')
-            let unique = moment( sessionDate ).format() + " " + timeslots[i];
-            console.log(unique);
-            console.log(moment( sessionDateEnd ).format());
-            let timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox">{timeslots[i]}</div>
+            let unique = moment( sessionDate ).format('YYYY-MM-DD HH') + ":00:00";
+            let timeslotRow;
+            for (let j=0; j < this.state.sessionList.length; j++) {
+                if( (moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") === this.state.sessionList[ j ].date){
+                    console.log((moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") + "BOOKED SESSION DATE: " + this.state.sessionList[j].date);
+                    timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox booked">BOOKED</div>
+                }
+            }
+            if(!timeslotRow){
+                timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox available" onClick={ this.handleSessionClick.bind(this, unique) }>{timeslots[i]}</div>
+            }
             timeslotList.push(timeslotRow)
         };
         
         return <div key={ moment( date ).format("YYYY/MM/DD") } className="col-md-2 col-4">{ timeslotList }</div>;
+    }
+
+    handleSessionClick( unique ){
+        console.log( unique )
     }
 
     handlePrev(){
@@ -68,6 +67,7 @@ class CalendarTest extends React.Component{
         console.log(this.state.baseDate);
         this.setState({baseDate: moment( this.state.baseDate ).subtract( 6, 'days' )});
         console.log(this.state.baseDate);
+        this.getAvailableSessions();
     }
 
     handleNext(){
@@ -75,21 +75,35 @@ class CalendarTest extends React.Component{
         console.log(this.state.baseDate);
         this.setState({baseDate: moment( this.state.baseDate ).add( 6, 'days' )});
         console.log(this.state.baseDate);
+        this.getAvailableSessions();
     }
 
     getAvailableSessions(){
-        axios.get('http://localhost:8080/calendar/',
-            {
-                "startDate": moment( this.state.baseDate ).format( 'YYYY-MM-DD' ),
-                "endDate": moment( this.state.baseDate ).add(5, 'days').format( 'YYYY-MM-DD' )
-            }
-        )
+        let bookedSessionsStart = moment( this.state.baseDate );
+        bookedSessionsStart = moment( bookedSessionsStart ).set({ hour:7,minute:0,second:0,millisecond:0 }).toDate();
+        let bookedSessionsEnd = moment( this.state.baseDate ).add(5, 'days');
+        // bookedSessionsEnd = moment( bookedSessionsEnd ).set({ hour:21,minute:48,second:0,millisecond:0 }).toDate();
+        bookedSessionsEnd = moment( bookedSessionsEnd ).set({hour:21}).set({minute:0}).toDate();
+        bookedSessionsEnd = moment( bookedSessionsEnd ).set({minute:0}).toDate();
+        // console.log("HERE " + moment(bookedSessionsStart).format( 'YYYY-MM-DD HH') + ':00:00' );
+        // console.log("and HERE " + moment(bookedSessionsEnd).format( 'YYYY-MM-DD HH:MM:SS') );
+        // axios.get(`http://localhost:8080/sessions/between/${ moment(bookedSessionsStart).format( 'YYYY-MM-DD HH') + ':00:00' }/${ moment(bookedSessionsEnd).format( 'YYYY-MM-DD HH') +":00:00" }`
+        axios.get(`https://api.myjson.com/bins/c14kk`
+        ).then( response => {
+            this.setState( { sessionList: response.data } );
+            console.log(this.state.sessionList[0].date);
+        });
+      }
+
+      componentDidMount(){
+        this.getAvailableSessions();
       }
 
     render(){
-        console.log(moment(this.state.baseDate).format());
-        console.log('START DATE: ' + moment( this.state.baseDate ).format( 'YYYY-MM-DD' ));
-        console.log('END DATE: ' + moment( this.state.baseDate ).add(5, 'days').format( 'YYYY-MM-DD' ));
+        console.log("session list length: " + this.state.sessionList.length)
+        // console.log(moment(this.state.baseDate).format());
+        // console.log('START DATE: ' + moment( this.state.baseDate ).format( 'YYYY-MM-DD' ));
+        // console.log('END DATE: ' + moment( this.state.baseDate ).add(5, 'days').format( 'YYYY-MM-DD' ));
         return(
             <Row className="justify-content-center whiteBgHere">
                     <Col className="col-12 col-md-10 align-center">
