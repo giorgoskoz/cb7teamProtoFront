@@ -46,16 +46,16 @@ class CalendarTest extends React.Component{
             for (let j=0; j < this.state.sessionList.length; j++) {
                 if( (moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") === this.state.sessionList[ j ].date){
                     console.log((moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") + "BOOKED SESSION DATE: " + this.state.sessionList[j].date);
-                    timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox booked">BOOKED</div>
+                    timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox booked mx-1">BOOKED</div>
                 }
             }
             if(!timeslotRow){
-                timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox available" onClick={ this.handleSessionClick.bind(this, unique) }>{timeslots[i]}</div>
+                timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox available mx-1" onClick={ this.handleSessionClick.bind(this, unique) }>{timeslots[i]}</div>
             }
             timeslotList.push(timeslotRow)
         };
         
-        return <div key={ moment( date ).format("YYYY/MM/DD") } className="col-md-2 col-4">{ timeslotList }</div>;
+        return <div key={ moment( date ).format("YYYY/MM/DD") } className="col-md-2 col-4 px-0 mx-0">{ timeslotList }</div>;
     }
 
     handleSessionClick( unique ){
