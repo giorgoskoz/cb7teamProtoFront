@@ -88,7 +88,7 @@ class CalendarTest extends React.Component{
         // console.log("HERE " + moment(bookedSessionsStart).format( 'YYYY-MM-DD HH') + ':00:00' );
         // console.log("and HERE " + moment(bookedSessionsEnd).format( 'YYYY-MM-DD HH:MM:SS') );
         // axios.get(`http://localhost:8080/sessions/between/${ moment(bookedSessionsStart).format( 'YYYY-MM-DD HH') + ':00:00' }/${ moment(bookedSessionsEnd).format( 'YYYY-MM-DD HH') +":00:00" }`
-        axios.get(`https://api.myjson.com/bins/c14kk`
+        axios.get(`https://api.myjson.com/bins/7i8dg`
         ).then( response => {
             this.setState( { sessionList: response.data } );
             console.log(this.state.sessionList[0].date);
