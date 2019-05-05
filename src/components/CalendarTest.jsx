@@ -3,6 +3,7 @@ import { Container, Col, Row, Jumbotron } from 'react-bootstrap';
 import moment from 'moment';
 import './CalendarTest.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
 
 class CalendarTest extends React.Component{
 
@@ -10,7 +11,8 @@ class CalendarTest extends React.Component{
     constructor( props ){
         super(props);
         this.state = {
-            baseDate: moment().add(1, "day")
+            baseDate: moment().add(1, "day"),
+            sessionList: []
         }
 
         this.dayWithWords = this.dayWithWords.bind(this);
@@ -75,8 +77,19 @@ class CalendarTest extends React.Component{
         console.log(this.state.baseDate);
     }
 
+    getAvailableSessions(){
+        axios.get('http://localhost:8080/calendar/',
+            {
+                "startDate": moment( this.state.baseDate ).format( 'YYYY-MM-DD' ),
+                "endDate": moment( this.state.baseDate ).add(5, 'days').format( 'YYYY-MM-DD' )
+            }
+        )
+      }
+
     render(){
         console.log(moment(this.state.baseDate).format());
+        console.log('START DATE: ' + moment( this.state.baseDate ).format( 'YYYY-MM-DD' ));
+        console.log('END DATE: ' + moment( this.state.baseDate ).add(5, 'days').format( 'YYYY-MM-DD' ));
         return(
             <Row className="justify-content-center whiteBgHere">
                     <Col className="col-12 col-md-10 align-center">
