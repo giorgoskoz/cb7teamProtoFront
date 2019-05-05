@@ -58,6 +58,7 @@ class RegisterModal extends Component {
             "password": this.passwordInput.current.value,
             "firstName": this.firstNameInput.current.value,
             "lastName": this.lastNameInput.current.value,
+            "photoLink": this.lastNameInput.current.value,
             "role": { id: 1 },
             "email": this.emailInput.current.value
           },
@@ -69,20 +70,20 @@ class RegisterModal extends Component {
           }
         ).then( response => {
           console.log( response.data );
-          this.context.setToken ( response.data.token );
-          this.context.setUser ( {
-          username: response.data.username,
-          firstname: response.data.firstname,
-          lastname: response.data.lastname,
-          email: response.data.email,
-          role: response.data.role
+        this.context.setToken ( response.data.alphanumeric );
+        this.context.setUser ( {
+          username: response.data.user.username,
+          firstname: response.data.user.firstname,
+          lastname: response.data.user.lastname,
+          email: response.data.user.email,
+          role: response.data.user.role
         });
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('username', response.data.username);
-        localStorage.setItem('firstname', response.data.firstname);
-        localStorage.setItem('lastname', response.data.lastname);
-        localStorage.setItem('email', response.data.email);
-        localStorage.setItem('role', response.data.role);
+        localStorage.setItem('token', response.data.alphanumeric);
+        localStorage.setItem('username', response.data.user.username);
+        localStorage.setItem('firstname', response.data.user.firstname);
+        localStorage.setItem('lastname', response.data.user.lastname);
+        localStorage.setItem('email', response.data.user.email);
+        localStorage.setItem('role', response.data.user.role);
         })
       }
     }
