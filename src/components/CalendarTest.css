@@ -32,6 +32,7 @@
 .booked {
     background-color: rgb(175,176,179);
     color: rgb(206, 206, 206);
+    cursor: default;
 }
 
 .fa-arrow-alt-circle-left, .fa-arrow-alt-circle-right {
