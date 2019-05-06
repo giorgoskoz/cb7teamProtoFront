@@ -18,7 +18,7 @@ class Gear extends React.Component {
     }
 
     fetchProvidedGear() {
-        Axios.get("https://api.myjson.com/bins/16vurm",
+        Axios.get("http://localhost:8080/gear/all-standart/",
             {
                 headers: {
                     'Accept': 'application/json',
@@ -35,7 +35,7 @@ class Gear extends React.Component {
         for (let i = 0; i < this.state.providedGearList.length; i++) {
             let gearCard = <div class="col-12 col-md-6 col-lg-4">
                             <div key={this.state.providedGearList[i].id} className="card">
-                                <img className="card-img-top" src={this.state.providedGearList[i].photolink} alt="Card image cap"></img>
+                                <img className="card-img-top" src={this.state.providedGearList[i].photoLink} alt="Card image cap"></img>
                                 <div className="card-body">
                                     <h4 className="card-title"><b>{this.state.providedGearList[i].name}</b></h4>
                                     <p className="card-text">{this.state.providedGearList[i].description}</p>
