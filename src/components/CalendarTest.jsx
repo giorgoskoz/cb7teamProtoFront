@@ -70,7 +70,6 @@ class CalendarTest extends React.Component{
     }
 
     getAvailableSessions( date ){
-        let that = this;
         let bookedSessionsStart = moment( date );
         bookedSessionsStart = moment( bookedSessionsStart ).set({ hour:7,minute:0,second:0,millisecond:0 }).toDate();
         let bookedSessionsEnd = moment( bookedSessionsStart ).add(5, 'days');
@@ -78,7 +77,7 @@ class CalendarTest extends React.Component{
         // axios.get(`https://api.myjson.com/bins/ptzx0`
         axios.get(`http://localhost:8080/sessions/between/${ moment(bookedSessionsStart).format( 'YYYY-MM-DD HH') + ':00:00' }/${ moment(bookedSessionsEnd).format( 'YYYY-MM-DD HH') +":00:00" }`
         ).then( response => {
-            that.setState( { sessionList: response.data } );
+            this.setState( { sessionList: response.data } );
         });
       }
 
