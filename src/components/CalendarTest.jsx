@@ -36,16 +36,13 @@ class CalendarTest extends React.Component{
         let timeslots = ["Morning", "Midday", "Afternoon", "Night"];
         let timeslotsTimes = ["8", "12", "16", "20"];
         let timeslotList = [<div key={ moment( date ).format("YYYY/MM/DD") } className="row justify-content-center d-flex align-items-center dayWordBox mb-0"><b>{moment( date ).format("dddd")}</b>{"\n"}</div>];
-        console.log( moment( date ).format("YYYY/MM/DD") );
         timeslotList.push( <div key={ moment( date ).format("DD / MM") } className="row justify-content-center d-flex align-items-center mb-2"><small>{moment( date ).format("DD / MM")}</small></div>);
         for(let i = 0; i<timeslots.length ; i++){
             let sessionDate = moment( date ).set({ hour: parseInt(timeslotsTimes[i]), minute: 0, second: 0});
-            let sessionDateEnd = moment ( sessionDate ).add(4, 'hours')
             let unique = moment( sessionDate ).format('YYYY-MM-DD HH') + ":00:00";
             let timeslotRow;
             for (let j=0; j < this.state.sessionList.length; j++) {
                 if( (moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") === this.state.sessionList[ j ].date){
-                    console.log((moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") + "BOOKED SESSION DATE: " + this.state.sessionList[j].date);
                     timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox booked mx-1">BOOKED</div>
                 }
             }
@@ -63,35 +60,25 @@ class CalendarTest extends React.Component{
     }
 
     handlePrev(){
-        console.log('clank');
-        console.log(this.state.baseDate);
+        this.getAvailableSessions( moment( this.state.baseDate ).subtract( 6, 'days' ) );
         this.setState({baseDate: moment( this.state.baseDate ).subtract( 6, 'days' )});
-        console.log(this.state.baseDate);
-        this.getAvailableSessions();
     }
 
     handleNext(){
-        console.log('clank');
-        console.log(this.state.baseDate);
         this.setState({baseDate: moment( this.state.baseDate ).add( 6, 'days' )});
-        console.log(this.state.baseDate);
-        this.getAvailableSessions();
+        this.getAvailableSessions( moment( this.state.baseDate ).add( 6, 'days' ) );
     }
 
-    getAvailableSessions(){
-        let bookedSessionsStart = moment( this.state.baseDate );
+    getAvailableSessions( date ){
+        let that = this;
+        let bookedSessionsStart = moment( date );
         bookedSessionsStart = moment( bookedSessionsStart ).set({ hour:7,minute:0,second:0,millisecond:0 }).toDate();
-        let bookedSessionsEnd = moment( this.state.baseDate ).add(5, 'days');
-        // bookedSessionsEnd = moment( bookedSessionsEnd ).set({ hour:21,minute:48,second:0,millisecond:0 }).toDate();
+        let bookedSessionsEnd = moment( bookedSessionsStart ).add(5, 'days');
         bookedSessionsEnd = moment( bookedSessionsEnd ).set({hour:21}).set({minute:0}).toDate();
-        bookedSessionsEnd = moment( bookedSessionsEnd ).set({minute:0}).toDate();
-        // console.log("HERE " + moment(bookedSessionsStart).format( 'YYYY-MM-DD HH') + ':00:00' );
-        // console.log("and HERE " + moment(bookedSessionsEnd).format( 'YYYY-MM-DD HH:MM:SS') );
-        // axios.get(`http://localhost:8080/sessions/between/${ moment(bookedSessionsStart).format( 'YYYY-MM-DD HH') + ':00:00' }/${ moment(bookedSessionsEnd).format( 'YYYY-MM-DD HH') +":00:00" }`
-        axios.get(`https://api.myjson.com/bins/7i8dg`
+        // axios.get(`https://api.myjson.com/bins/ptzx0`
+        axios.get(`http://localhost:8080/sessions/between/${ moment(bookedSessionsStart).format( 'YYYY-MM-DD HH') + ':00:00' }/${ moment(bookedSessionsEnd).format( 'YYYY-MM-DD HH') +":00:00" }`
         ).then( response => {
-            this.setState( { sessionList: response.data } );
-            console.log(this.state.sessionList[0].date);
+            that.setState( { sessionList: response.data } );
         });
       }
 
@@ -100,10 +87,6 @@ class CalendarTest extends React.Component{
       }
 
     render(){
-        console.log("session list length: " + this.state.sessionList.length)
-        // console.log(moment(this.state.baseDate).format());
-        // console.log('START DATE: ' + moment( this.state.baseDate ).format( 'YYYY-MM-DD' ));
-        // console.log('END DATE: ' + moment( this.state.baseDate ).add(5, 'days').format( 'YYYY-MM-DD' ));
         return(
             <Row className="justify-content-center whiteBgHere">
                     <Col className="col-12 col-md-10 align-center">
