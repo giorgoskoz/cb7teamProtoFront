@@ -17,6 +17,7 @@ class BookSessionModal extends React.Component {
       this.handleShowGear = this.handleShowGear.bind(this);
       this.addSelectedGear = this.addSelectedGear.bind(this);
       this.removeSelectedGear = this.removeSelectedGear.bind(this);
+      this.lytrosis = this.lytrosis.bind(this);
   
       this.state = {
         extraGear: [],
@@ -24,13 +25,14 @@ class BookSessionModal extends React.Component {
       };
     }
 
-    addSelectedGear( gear ){
-        this.setState({ selectedExtraGear: this.state.selectedExtraGear.push(gear) })
+    addSelectedGear( gear, prevState ){
+        this.setState(prevState => ({
+            selectedExtraGear: [...prevState.selectedExtraGear, gear]
+          }))
     }
 
     removeSelectedGear( gear ){
-        let gearIndex = this.state.selectedExtraGear.indexOf(gear);
-        this.setState({ selectedExtraGear: this.state.selectedExtraGear.splice(gearIndex, 1)})
+        this.setState(prevState => ({ selectedExtraGear: prevState.selectedExtraGear.filter(newGear => newGear !== gear) }));
     }
   
     handleClose() {
@@ -51,6 +53,22 @@ class BookSessionModal extends React.Component {
             this.setState({extraGear: response.data})
         })
     }
+
+    lytrosis(){
+        let gearRows = [];
+        for(let i=0; i<this.state.extraGear.length; i++){
+            let gearRow =
+            <div className="row">
+                <div className="col"><img src={this.state.extraGear[i].photoLink} alt=""/></div>
+                <div className="col">{this.state.extraGear[i].description}</div>
+                <div className="col">{this.state.extraGear[i].price}</div>
+                <div className="btn btn-dark" onClick={ this.addSelectedGear.bind(this, this.state.extraGear[i]) }>Add</div>
+                <div className="btn btn-dark" onClick={ this.removeSelectedGear.bind(this, this.state.extraGear[i]) }>Remove</div>
+            </div>;
+            gearRows.push(gearRow);
+        }
+        return <div>{gearRows}</div>
+    }
   
     render() {
       return (
@@ -61,9 +79,10 @@ class BookSessionModal extends React.Component {
             </Modal.Header>
             <Modal.Body>
                 <p>You can also rent the following gear:</p>
-                {this.state.extraGear.map(gear =>{
+                {/* {this.state.extraGear.map(gear =>{
                     return <BookSessionModalGear key={gear.id} gear={gear} addSelectedGear={this.addSelectedGear} removeSelectedGear={this.removeSelectedGear}/>
-                })}
+                })} */}
+                {this.lytrosis()}
                 {console.log(this.state.selectedExtraGear)}
             </Modal.Body>
             <Modal.Footer>
