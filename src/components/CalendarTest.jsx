@@ -4,9 +4,11 @@ import moment from 'moment';
 import './CalendarTest.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
+import { GlobalProvider, GlobalContext } from './GlobalContext';
 
 class CalendarTest extends React.Component{
 
+    static contextType = GlobalContext;
 
     constructor( props ){
         super(props);
@@ -56,7 +58,9 @@ class CalendarTest extends React.Component{
     }
 
     handleSessionClick( unique ){
-        console.log( unique )
+        console.log( unique );
+        this.context.setShowBookSessionModal( true );
+        this.context.setSessionToBook( unique );
     }
 
     handlePrev(){
@@ -87,7 +91,8 @@ class CalendarTest extends React.Component{
 
     render(){
         return(
-            <Row className="justify-content-center whiteBgHere">
+            <GlobalProvider value={ this.state }>
+                <Row className="justify-content-center whiteBgHere">
                     <Col className="col-12 col-md-10 align-center">
                         <Container className="mt-5">
                             <Row className="mb-4">
@@ -102,6 +107,7 @@ class CalendarTest extends React.Component{
                         </Container>
                     </Col>
                 </Row>
+            </GlobalProvider>
         );
     }
 

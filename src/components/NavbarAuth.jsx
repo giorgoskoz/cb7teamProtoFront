@@ -1,6 +1,8 @@
 import React from 'react';
 import { Navbar, NavDropdown } from 'react-bootstrap';
 import { GlobalContext } from './GlobalContext';
+import { Link, withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 class NavbarAuth extends React.Component {
 
@@ -14,6 +16,7 @@ class NavbarAuth extends React.Component {
         this.handleShowLoginModal = this.handleShowLoginModal.bind(this);
         this.handleShowRegisterModal = this.handleShowRegisterModal.bind(this);
         this.doLogout = this.doLogout.bind(this);
+        this.handleDashboardClick = this.handleDashboardClick.bind(this);
 
         this.state = {
             showLoginModal: false,
@@ -31,7 +34,12 @@ class NavbarAuth extends React.Component {
         this.context.setShowRegisterModal( true );
     }
 
+    handleDashboardClick(){
+        this.props.history.push('/dashboard');
+    }
+
     doLogout(){
+        let customHeader = "X-KLICKS-AUTH"
         this.context.setToken( null );
         this.context.setUser( {
             username: "",
@@ -46,6 +54,12 @@ class NavbarAuth extends React.Component {
         localStorage.removeItem("lastname");
         localStorage.removeItem("email");
         localStorage.removeItem("role");
+        axios.post('http://localhost:8080/login/logout',
+            {
+                headers: {
+                    "X-KLICKS-AUTH": this.context.token
+                }
+            });
     }
 
     logged() {
@@ -57,6 +71,9 @@ class NavbarAuth extends React.Component {
                 <NavDropdown.Item eventKey="4.3">
                     Something else here
                         </NavDropdown.Item>
+                <NavDropdown.Item eventKey="4.3" onClick={ this.handleDashboardClick }>
+                    Dashboard
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item eventKey="4.4" onClick={ this.doLogout }>Logout</NavDropdown.Item>
             </NavDropdown>
@@ -90,4 +107,4 @@ class NavbarAuth extends React.Component {
 
 }
 
-export default NavbarAuth;
+export default withRouter(NavbarAuth);

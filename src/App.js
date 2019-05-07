@@ -11,10 +11,12 @@ import { Navbar } from "react-bootstrap";
 import NavbarStranger from "./components/Navbar";
 import RegisterModal from "./components/RegisterModal";
 import LoginModal from "./components/LoginModal";
+import BookSessionModal from "./components/BookSessionModal";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Footer from './components/Footer';
+import Dashboard from './components/Dashboard';
 
 library.add(faUser);
 library.add(faLock);
@@ -49,6 +51,14 @@ class App extends React.Component {
       }),
       setShowRegisterModal: ( value ) => this.setState({
         showRegisterModal: value
+      }),
+      sessionToBook: null,
+      setSessionToBook: ( value ) => this.setState({
+          sessionToBook: value
+      }),
+      showBookModal: false,
+      setShowBookSessionModal: ( value ) => this.setState({
+          showBookModal: value
       })
     };
   }
@@ -72,12 +82,14 @@ class App extends React.Component {
           <div id="forBackgroundImg">
             <LoginModal></LoginModal>
             <RegisterModal></RegisterModal>
+            <BookSessionModal></BookSessionModal>
             <NavDropdownExample></NavDropdownExample>
     
             <Route exact path="/" component={Home} />
             <Route path="/about" component={About} />
             <Route path="/calendar" component={Calendar} />
             <Route path="/gear" component={Gear} />
+            <Route path="/dashboard" component={Dashboard} />
             <Route path="/crew" component={Topics} />
             <Route path="/ctest" component={CalendarTest} />
             <Footer></Footer>
