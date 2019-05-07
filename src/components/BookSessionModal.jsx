@@ -15,10 +15,22 @@ class BookSessionModal extends React.Component {
       this.handleShow = this.handleShow.bind(this);
       this.handleClose = this.handleClose.bind(this);
       this.handleShowGear = this.handleShowGear.bind(this);
+      this.addSelectedGear = this.addSelectedGear.bind(this);
+      this.removeSelectedGear = this.removeSelectedGear.bind(this);
   
       this.state = {
-        extraGear: []
+        extraGear: [],
+        selectedExtraGear: []
       };
+    }
+
+    addSelectedGear( gear ){
+        this.setState({ selectedExtraGear: this.state.selectedExtraGear.push(gear) })
+    }
+
+    removeSelectedGear( gear ){
+        let gearIndex = this.state.selectedExtraGear.indexOf(gear);
+        this.setState({ selectedExtraGear: this.state.selectedExtraGear.splice(gearIndex, 1)})
     }
   
     handleClose() {
@@ -50,8 +62,9 @@ class BookSessionModal extends React.Component {
             <Modal.Body>
                 <p>You can also rent the following gear:</p>
                 {this.state.extraGear.map(gear =>{
-                    return <BookSessionModalGear key={gear.id} gear={gear}/>
+                    return <BookSessionModalGear key={gear.id} gear={gear} addSelectedGear={this.addSelectedGear} removeSelectedGear={this.removeSelectedGear}/>
                 })}
+                {console.log(this.state.selectedExtraGear)}
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleClose}>
