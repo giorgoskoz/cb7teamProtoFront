@@ -16,6 +16,10 @@ class LoginModal extends Component {
     
     constructor(props) {
         super(props);
+
+        this.state = {
+          wrongCredentials: false
+        };
         this.usernameInput = React.createRef();
         this.passwordInput = React.createRef();
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,8 +31,7 @@ class LoginModal extends Component {
       this.context.setShowLoginModal( false );
     }
 
-    handleSubmit(event){
-      this.handleCloseLoginModal(); 
+    handleSubmit(event){ 
       console.log('ref to username: ', this.usernameInput.current.value);
       console.log('ref to password: ', this.passwordInput.current.value);
       // axios.get('https://jsonplaceholder.typicode.com/todos/1',
@@ -46,6 +49,7 @@ class LoginModal extends Component {
           }
         }
       ).then( response => {
+        this.handleCloseLoginModal();
         console.log( response.data );
         this.context.setToken ( response.data.alphanumeric );
         // console.log( this.context.token );
@@ -69,6 +73,8 @@ class LoginModal extends Component {
         localStorage.setItem('lastname', response.data.user.lastName);
         localStorage.setItem('email', response.data.user.email);
         localStorage.setItem('role', response.data.user.role);
+      }).catch(error => {
+        this.setState({ wrongCredentials: true })
       });
     }
 
@@ -118,6 +124,8 @@ class LoginModal extends Component {
                     </Form.Control.Feedback>
                   </InputGroup>
                 </Form.Group>
+                { ((this.state.wrongCredentials) ? <div style={{ color: "red" }}>Wrong credentials</div> : null) }
+                
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={ this.handleCloseLoginModal }>
