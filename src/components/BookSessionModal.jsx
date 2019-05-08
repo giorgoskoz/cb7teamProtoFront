@@ -17,7 +17,6 @@ class BookSessionModal extends React.Component {
       this.handleShowGear = this.handleShowGear.bind(this);
       this.addSelectedGear = this.addSelectedGear.bind(this);
       this.removeSelectedGear = this.removeSelectedGear.bind(this);
-      this.lytrosis = this.lytrosis.bind(this);
   
       this.state = {
         extraGear: [],
@@ -53,27 +52,11 @@ class BookSessionModal extends React.Component {
             this.setState({extraGear: response.data})
         })
     }
-
-    lytrosis(){
-        let gearRows = [];
-        for(let i=0; i<this.state.extraGear.length; i++){
-            let gearRow =
-            <div className="row">
-                <div className="col"><img src={this.state.extraGear[i].photoLink} alt=""/></div>
-                <div className="col">{this.state.extraGear[i].description}</div>
-                <div className="col">{this.state.extraGear[i].price}</div>
-                <div className="btn btn-dark" onClick={ this.addSelectedGear.bind(this, this.state.extraGear[i]) }>Add</div>
-                <div className="btn btn-dark" onClick={ this.removeSelectedGear.bind(this, this.state.extraGear[i]) }>Remove</div>
-            </div>;
-            gearRows.push(gearRow);
-        }
-        return <div>{gearRows}</div>
-    }
   
     render() {
       return (
         <>
-          <Modal show={ this.context.showBookModal } onHide={ this.handleClose }>
+          <Modal show={ this.context.showBookModal } onHide={ this.handleClose } size="lg">
             <Modal.Header closeButton>
               <Modal.Title>Modal heading</Modal.Title>
             </Modal.Header>
