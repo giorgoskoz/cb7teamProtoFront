@@ -32,7 +32,7 @@ class BookSessionModalGear extends React.Component{
             <div className="col">{this.props.gear.description}</div>
             <div className="col">{this.props.gear.price}</div>
             {((!this.state.added) ? <div className="btn btn-dark" onClick={ this.handleAddClick }>Add</div> : <div className="btn btn-dark disabled" onClick={null}>Added</div>)}
-            {((this.state.added) ? <div className="btn btn-dark" onClick={ this.handleRemovelick }>Remove</div> : <div className="btn btn-dark disabled" onClick={null}>Remove</div>)}
+            {((this.state.added) ? <div className="btn btn-dark" onClick={ this.handleRemoveClick }>Remove</div> : <div className="btn btn-dark disabled" onClick={null}>Remove</div>)}
             
             
         </div>
