@@ -14,7 +14,7 @@ import LoginModal from "./components/LoginModal";
 import BookSessionModal from "./components/BookSessionModal";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faLock, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faLock, faArrowRight, faArrowLeft, faAngleLeft,faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 
@@ -22,6 +22,7 @@ library.add(faUser);
 library.add(faLock);
 library.add(faArrowLeft);
 library.add(faArrowRight);
+library.add(faAngleLeft,faAngleRight)
 
 class App extends React.Component {
 
