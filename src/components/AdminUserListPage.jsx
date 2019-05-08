@@ -76,6 +76,7 @@ class AdminUserListPage extends React.Component {
         return (
             <React.Fragment>
                 <div><h2>AdminUserListPage</h2></div>
+                <small>{this.state.numberOfTotalResults} results</small>
                 <table className="table table-striped custab" style={{ width: "80%", margin: "auto" }}>
                     <thead>
                         <tr>
