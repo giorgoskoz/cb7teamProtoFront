@@ -25,10 +25,10 @@ class BookSessionModal extends React.Component {
       };
     }
 
-    addSelectedGear( gear, prevState ){
-        this.setState(prevState => ({
-            selectedExtraGear: [...prevState.selectedExtraGear, gear]
-          }))
+    addSelectedGear( gear ){
+      this.setState({
+        selectedExtraGear: [...this.state.selectedExtraGear, gear]
+      })
     }
 
     removeSelectedGear( gear ){
@@ -79,10 +79,10 @@ class BookSessionModal extends React.Component {
             </Modal.Header>
             <Modal.Body>
                 <p>You can also rent the following gear:</p>
-                {/* {this.state.extraGear.map(gear =>{
+                {this.state.extraGear.map(gear =>{
                     return <BookSessionModalGear key={gear.id} gear={gear} addSelectedGear={this.addSelectedGear} removeSelectedGear={this.removeSelectedGear}/>
-                })} */}
-                {this.lytrosis()}
+                })}
+                {/* {this.lytrosis()} */}
                 {console.log(this.state.selectedExtraGear)}
             </Modal.Body>
             <Modal.Footer>
