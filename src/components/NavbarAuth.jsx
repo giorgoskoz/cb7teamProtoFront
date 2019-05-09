@@ -71,9 +71,13 @@ class NavbarAuth extends React.Component {
                 <NavDropdown.Item eventKey="4.3">
                     Something else here
                         </NavDropdown.Item>
-                <NavDropdown.Item eventKey="4.3" onClick={ this.handleDashboardClick }>
+                {((this.context.user.role.id === 2) ? <NavDropdown.Item eventKey="4.3" onClick={ this.handleDashboardClick }>
                     Dashboard
-                </NavDropdown.Item>
+                </NavDropdown.Item> : null)}
+                {/* {((true) ? <NavDropdown.Item eventKey="4.3" onClick={ this.handleDashboardClick }>
+                    Dashboard
+                </NavDropdown.Item> : null)} */}
+                
                 <NavDropdown.Divider />
                 <NavDropdown.Item eventKey="4.4" onClick={ this.doLogout }>Logout</NavDropdown.Item>
             </NavDropdown>

@@ -68,11 +68,13 @@ class LoginModal extends Component {
           role: response.data.user.role
         });
         localStorage.setItem('token', response.data.alphanumeric);
+        localStorage.setItem('user', JSON.stringify( response.data.user));
         localStorage.setItem('username', response.data.user.username);
         localStorage.setItem('firstname', response.data.user.firstName);
         localStorage.setItem('lastname', response.data.user.lastName);
         localStorage.setItem('email', response.data.user.email);
-        localStorage.setItem('role', response.data.user.role);
+        // let role = JSON.stringify(response.data.user.role);
+        // localStorage.setItem('role', role);
       }).catch(error => {
         this.setState({ wrongCredentials: true })
       });

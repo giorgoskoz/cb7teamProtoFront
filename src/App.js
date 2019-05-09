@@ -34,7 +34,9 @@ class App extends React.Component {
         firstname: "",
         lastname: "",
         email: "",
-        role: ""
+        role: {"id":"",
+              "name":""
+        }
                       } : user = this.props.loggedUser.user);
     this.state = {
       token: this.props.loggedUser.token,
@@ -75,6 +77,22 @@ class App extends React.Component {
       )
     }
   }
+
+  // componentDidMount(){
+  //   this.setState({
+  //     token: localStorage.getItem( 'token' ),
+  //   // token: "token",
+  //   user: {
+  //       "username": localStorage.getItem("username"),
+  //       "firstname": localStorage.getItem("firstname"),
+  //       "lastname": localStorage.getItem("lastname"),
+  //       "email": localStorage.getItem("email"),
+  //       "role": {
+  //         "id": localStorage.getItem("role"),
+  //         "name": localStorage.getItem("role")
+  //     }
+  //   }})
+  // }
 
   render(){
     return (
