@@ -14,15 +14,15 @@ class BookSessionModalGear extends React.Component{
         this.handleRemoveClick = this.handleRemoveClick.bind(this);
     }
 
-    handleAddClick(){
+    handleAddClick( gear ){
         console.log("handle add clicked");
         this.setState({added: true});
-        this.props.addSelectedGear(this.props.gear);
+        this.props.addSelectedGear(gear);
     }
 
-    handleRemoveClick(){
+    handleRemoveClick( gear ){
         this.setState({added: false});
-        this.props.removeSelectedGear(this.props.gear);
+        this.props.removeSelectedGear(gear);
     }
 
     render(){
@@ -35,8 +35,8 @@ class BookSessionModalGear extends React.Component{
             <div className="col col-6 d-flex align-items-center"><small>{this.props.gear.description}</small></div>
             <div className="col col-1 mr-auto d-flex align-items-center">{this.props.gear.price}€</div>
             <div className="col col-2">
-                {((!this.state.added) ? <div className="btn btn-dark" onClick={ this.handleAddClick }>Add</div> : <div className="btn btn-dark disabled" onClick={null}>Added!</div>)}
-                {((this.state.added) ? <div className="btn btn-dark" onClick={ this.handleRemoveClick }>Remove</div> : <div className="btn btn-dark disabled" onClick={null}>Remove</div>)}
+                {((!this.state.added) ? <div className="btn btn-dark" onClick={ this.handleAddClick.bind(this, this.props.gear) }>Add</div> : <div className="btn btn-dark disabled" onClick={null}>Added!</div>)}
+                {((this.state.added) ? <div className="btn btn-dark" onClick={ this.handleRemoveClick.bind(this, this.props.gear) }>Remove</div> : <div className="btn btn-dark disabled" onClick={null}>Remove</div>)}
             </div>
             <div className="row">
             </div>
