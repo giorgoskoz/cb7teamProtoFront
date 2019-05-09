@@ -1,4 +1,6 @@
 import React from 'react';
+import { Jumbotron, Container, Row, Col, CardDeck, Tabs, Tab, Sonnet } from 'react-bootstrap';
+import Gear from './Gear';
 
 class GearHeader extends React.Component{
 
