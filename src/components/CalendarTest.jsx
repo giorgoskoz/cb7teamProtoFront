@@ -14,7 +14,9 @@ class CalendarTest extends React.Component{
         super(props);
         this.state = {
             baseDate: moment().add(1, "day"),
-            sessionList: [ { "date": "2019"} ]
+            sessionList: [ { "date": "2019",
+                                "user":{"id":"pouts"}
+            }]
         }
 
         this.dailySchedule2 = this.dailySchedule2.bind(this);
@@ -43,9 +45,16 @@ class CalendarTest extends React.Component{
             let sessionDate = moment( date ).set({ hour: parseInt(timeslotsTimes[i]), minute: 0, second: 0});
             let unique = moment( sessionDate ).format('YYYY-MM-DD HH') + ":00:00";
             let timeslotRow;
-            for (let j=0; j < this.state.sessionList.length; j++) {
-                if( (moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") === this.state.sessionList[ j ].date){
-                    timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox booked mx-1">BOOKED</div>
+            for (let k=0; k<this.state.sessionList.length; k++){
+                if( this.context.user.id === this.state.sessionList[ k ].user.id){
+                    timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox own mx-1">THIS IS YOUR SESSION!</div>
+                }
+            }
+            if(!timeslotRow){
+                for (let j=0; j < this.state.sessionList.length; j++) {
+                    if( (moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") === this.state.sessionList[ j ].date){
+                        timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox booked mx-1">BOOKED</div>
+                    }
                 }
             }
             if(!timeslotRow){

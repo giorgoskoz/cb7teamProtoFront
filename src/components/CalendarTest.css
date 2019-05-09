@@ -35,6 +35,12 @@
     cursor: default;
 }
 
+.own {
+    background-color: rgb(7, 155, 32);
+    color: rgb(255, 255, 255);
+    cursor: default;
+}
+
 .fa-arrow-alt-circle-left, .fa-arrow-alt-circle-right {
     font-size: 38px;
 }
