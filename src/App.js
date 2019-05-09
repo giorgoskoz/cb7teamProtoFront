@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import NavDropdownExample from './components/NavDropdownExample';
 import Gear from './components/Gear';
 import Calendar from './components/Calendar';
@@ -17,6 +17,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faArrowRight, faArrowLeft, faAngleLeft,faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
+import NotAuthorized from './components/NotAuthorized';
+import MySessions from './components/MySessions';
 
 library.add(faUser);
 library.add(faLock);
@@ -78,6 +80,15 @@ class App extends React.Component {
     }
   }
 
+  renderProtectedComponent(ProtectedComponent) {
+    if (this.context.token === null || this.context.token === undefined ) {
+      return (props) => <Redirect to='/notauthorized' />;
+    }
+    else {
+      return  (props) => <MySessions {...props} />;  
+    }
+  }
+
   // componentDidMount(){
   //   this.setState({
   //     token: localStorage.getItem( 'token' ),
@@ -108,9 +119,10 @@ class App extends React.Component {
             <Route path="/about" component={About} />
             <Route path="/calendar" component={Calendar} />
             <Route path="/gear" component={Gear} />
+            <Route path="/mysessions" component={MySessions} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/crew" component={Topics} />
-            <Route path="/ctest" component={CalendarTest} />
+            <Route path="/notauthorized" component={NotAuthorized} />
             <Footer></Footer>
           </div>
         </Router>

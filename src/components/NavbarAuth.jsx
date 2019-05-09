@@ -17,6 +17,7 @@ class NavbarAuth extends React.Component {
         this.handleShowRegisterModal = this.handleShowRegisterModal.bind(this);
         this.doLogout = this.doLogout.bind(this);
         this.handleDashboardClick = this.handleDashboardClick.bind(this);
+        this.handleMySessionsClick = this.handleMySessionsClick.bind(this);
 
         this.state = {
             showLoginModal: false,
@@ -36,6 +37,10 @@ class NavbarAuth extends React.Component {
 
     handleDashboardClick(){
         this.props.history.push('/dashboard');
+    }
+
+    handleMySessionsClick(){
+        this.props.history.push('/mysessions');
     }
 
     doLogout(){
@@ -68,10 +73,10 @@ class NavbarAuth extends React.Component {
             <NavDropdown title={this.context.user.username} id="nav-dropdown" alignRight="true" className="mx-3 d-flex align-items-center">
                 <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
                 <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item eventKey="4.3">
-                    Something else here
-                        </NavDropdown.Item>
-                {((this.context.user.role.id === 2) ? <NavDropdown.Item eventKey="4.3" onClick={ this.handleDashboardClick }>
+                <NavDropdown.Item eventKey="4.3" onClick={ this.handleMySessionsClick }>
+                    My sessions
+                </NavDropdown.Item>
+                {((this.context.user.role.id === 2) ? <NavDropdown.Item eventKey="4.4" onClick={ this.handleDashboardClick }>
                     Dashboard
                 </NavDropdown.Item> : null)}
                 {/* {((true) ? <NavDropdown.Item eventKey="4.3" onClick={ this.handleDashboardClick }>
