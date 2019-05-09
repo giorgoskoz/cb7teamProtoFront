@@ -67,10 +67,12 @@ class BookSessionModal extends React.Component {
       function() {
         alert('Booked! Ready to go!');
         that.handleClose();
+        window.location.reload();
       }).catch(
         function(e){
           alert('error' + e.message);
           that.handleClose();
+          window.location.reload();
       });
 
       // axios.post("http://localhost:8080/book2/" + this.context.sessionToBook + "/" + this.state.sessionPrice,
