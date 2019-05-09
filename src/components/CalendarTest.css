@@ -25,6 +25,11 @@
     margin: 2px;
 }
 
+.available:hover {
+    cursor: pointer;
+    border-width: 5px;
+}
+
 .available {
     cursor: pointer
 }

@@ -45,22 +45,32 @@ class CalendarTest extends React.Component{
             let sessionDate = moment( date ).set({ hour: parseInt(timeslotsTimes[i]), minute: 0, second: 0});
             let unique = moment( sessionDate ).format('YYYY-MM-DD HH') + ":00:00";
             let timeslotRow;
-            for (let k=0; k<this.state.sessionList.length; k++){
-                if( this.context.user.id === this.state.sessionList[ k ].user.id){
-                    timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox own mx-1">THIS IS YOUR SESSION!</div>
-                }
-            }
-            if(!timeslotRow){
-                for (let j=0; j < this.state.sessionList.length; j++) {
-                    if( (moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") === this.state.sessionList[ j ].date){
-                        timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox booked mx-1">BOOKED</div>
-                    }
+            for (let j=0; j < this.state.sessionList.length; j++) {
+                if( (moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") === this.state.sessionList[ j ].date){
+                    timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox booked mx-1">BOOKED</div>
                 }
             }
             if(!timeslotRow){
                 timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox available mx-1" onClick={ this.handleSessionClick.bind(this, unique) }>{timeslots[i]}</div>
             }
             timeslotList.push(timeslotRow)
+            // for (let k=0; k<this.state.sessionList.length; k++){
+            //     ((this.context.user.id === this.state.sessionList[ k ].user.id) ? timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox own mx-1">THIS IS YOUR SESSION!</div> : timeslotRow = null);
+            //     // if( this.context.user.id === this.state.sessionList[ k ].user.id){
+            //     //     timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox own mx-1">THIS IS YOUR SESSION!</div>
+            //     // }
+            // }
+            // if(!timeslotRow){
+            //     for (let j=0; j < this.state.sessionList.length; j++) {
+            //         if( (moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") === this.state.sessionList[ j ].date){
+            //             timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox booked mx-1">BOOKED</div>
+            //         }
+            //     }
+            // }
+            // if(!timeslotRow){
+            //     timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox available mx-1" onClick={ this.handleSessionClick.bind(this, unique) }>{timeslots[i]}</div>
+            // }
+            // timeslotList.push(timeslotRow)
         };
         
         return <div key={ moment( date ).format("YYYY/MM/DD") } className="col-md-2 col-4 px-0 mx-0">{ timeslotList }</div>;
@@ -106,7 +116,7 @@ class CalendarTest extends React.Component{
                         <Container className="mt-5">
                             <Row className="mb-4">
                                 <Col className="calendarNav justify-content-center d-flex align-items-center" onClick={ this.handlePrev }><i className="far fa-arrow-alt-circle-left"></i></Col>
-                                <Col className="col-6 col-md-8 justify-content-center d-flex align-items-center calendarHead">this "week"<br></br>from { moment(this.state.baseDate).format("DD / MM")  } to { moment(this.state.baseDate).add(6, 'days').format("DD / MM")  }</Col>
+                                <Col className="col-6 col-md-8 justify-content-center d-flex align-items-center calendarHead">"week"<br></br>from { moment(this.state.baseDate).format("DD / MM")  } to { moment(this.state.baseDate).add(6, 'days').format("DD / MM")  }</Col>
                                 <Col className="calendarNav justify-content-center d-flex align-items-center" onClick={ this.handleNext }><i className="far fa-arrow-alt-circle-right"></i></Col>
                             </Row>
                             <Row>
