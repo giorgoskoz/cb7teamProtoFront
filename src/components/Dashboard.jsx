@@ -13,14 +13,14 @@ class Dashboard extends React.Component {
     render() {
         return (
             <div>
-                <div className="jumbotron jumbotron-fluid">
+                <div className="jumbotron jumbotron-fluid mb-0">
                     <div className="container">
                         <h1 className="display-4">Dashboard</h1>
                         <p className="lead">Arrange the inner workings</p>
                     </div>
                 </div>
                 <div className="whiteBgHere">   
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center mt-0">
                         <div className="col col-8">
                             <AdminAddProvidedGear></AdminAddProvidedGear>
                         </div>

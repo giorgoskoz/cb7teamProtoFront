@@ -86,7 +86,7 @@ class CalendarTest extends React.Component{
       }
 
       componentDidMount(){
-        this.getAvailableSessions();
+        this.getAvailableSessions( this.state.baseDate );
       }
 
     render(){

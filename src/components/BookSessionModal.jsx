@@ -20,6 +20,7 @@ class BookSessionModal extends React.Component {
       this.removeSelectedGear = this.removeSelectedGear.bind(this);
   
       this.state = {
+        sessionDefaultPrice: 50,
         sessionPrice: 50,
         extraGear: [],
         selectedExtraGear: []
@@ -53,16 +54,24 @@ class BookSessionModal extends React.Component {
     }
 
     handleBookSession(){
-
+      let that = this;
+      let gearArray = this.state.selectedExtraGear;
       $.ajax({
-        url: "http://localhost:8080/book2/" + this.context.sessionToBook + "/" + this.state.sessionPrice,
-        dataType: 'json',                       
+        url: "http://localhost:8080/sessions/book2/" + this.context.sessionToBook + "/" + this.state.sessionDefaultPrice,
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",                       
         type: 'post',         
-        headers: {'X-MSG-AUTH': this.context.token },
-        data: {selectedExtraGear:this.state.selectedExtraGear}
-    }).done( this.forceUpdate() ).catch( function(e){
-        alert(e);
-    });
+        headers: {'X-KLICKS-AUTH': this.context.token },
+        data: JSON.stringify(gearArray)
+    }).done(
+      function() {
+        alert('Booked! Ready to go!');
+        that.handleClose();
+      }).catch(
+        function(e){
+          alert('error' + e.message);
+          that.handleClose();
+      });
 
       // axios.post("http://localhost:8080/book2/" + this.context.sessionToBook + "/" + this.state.sessionPrice,
       //   {
