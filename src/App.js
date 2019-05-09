@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import NavDropdownExample from './components/NavDropdownExample';
-import Gear from './components/Gear';
+import ExtraGear from './components/ExtraGear';
+import GearHeader from './components/GearHeader';
 import Calendar from './components/Calendar';
 import CalendarTest from './components/CalendarTest';
 import Home from './components/Home';
@@ -107,7 +108,8 @@ class App extends React.Component {
             <Route exact path="/" component={Home} />
             <Route path="/about" component={About} />
             <Route path="/calendar" component={Calendar} />
-            <Route path="/gear" component={Gear} />
+            <Route path="/gear" component={GearHeader} />
+            <Route path="/extragear" component={ExtraGear} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/crew" component={Topics} />
             <Route path="/ctest" component={CalendarTest} />

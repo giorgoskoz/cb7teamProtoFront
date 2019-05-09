@@ -19,6 +19,7 @@ class AdminUserListPage extends React.Component {
         this.setActivePage = this.setActivePage.bind(this);
         this.setResultsPerPage = this.setResultsPerPage.bind(this);
         this.fetchPageResults = this.fetchPageResults.bind(this);
+        this.handleDeletion = this.handleDeletion.bind(this);
     }
 
     static contextType = GlobalContext;
@@ -72,6 +73,24 @@ class AdminUserListPage extends React.Component {
             }
         }).catch(error => console.error('Error:', error));
     }
+
+    handleDeletion = (id) =>{
+        console.log("clicked");
+        const url = 'http://localhost:8080/users/delete/'+id
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                "X-KLICKS-AUTH": this.context.token,
+                'Accept': 'application/json'
+            },
+        }).then(response => {
+            if (response.status === 200) {
+                    alert("Successfull deletion")
+                    this.fetchPageResults();
+            }
+        }).catch(error => console.error('Error:', error));
+
+    }
     render() {
         return (
             <React.Fragment>
@@ -84,14 +103,15 @@ class AdminUserListPage extends React.Component {
                             <th> Username</th>
                             <th> FirstName </th>
                             <th> LastName </th>
-                            <th> email </th>
+                            <th> Email </th>
+                            <th> Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.users.length == 0 ? (<img src="http://photodentro.edu.gr/v/images/loading.gif" alt="Loading" width="80px" />) : null}
                         {this.state.users.map((user, index) => {
                             return (
-                                <UserRow key={user.id} user={user} i={((this.state.currentPage) * this.state.resultsPerPage)+ (index + 1)} />);
+                                <UserRow key={user.id} user={user} i={((this.state.currentPage) * this.state.resultsPerPage)+ (index + 1)} handleDeletion = {this.handleDeletion} />);
                         })}
                     </tbody>
                 </table>
