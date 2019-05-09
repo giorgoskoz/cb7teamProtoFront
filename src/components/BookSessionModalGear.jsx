@@ -15,14 +15,14 @@ class BookSessionModalGear extends React.Component{
     }
 
     handleAddClick(){
+        console.log("handle add clicked");
         this.setState({added: true});
-        this.props.addSelectedGear.bind(this, this.props.gear);
+        this.props.addSelectedGear(this.props.gear);
     }
 
     handleRemoveClick(){
-        console.log('clank');
         this.setState({added: false});
-        this.props.removeSelectedGear.bind(this, this.props.gear);
+        this.props.removeSelectedGear(this.props.gear);
     }
 
     render(){
