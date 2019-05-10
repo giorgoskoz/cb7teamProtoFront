@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import NavDropdownExample from './components/NavDropdownExample';
 import Gear from './components/Gear';
+import ExtraGear from './components/ExtraGear';
+import GearHeader from './components/GearHeader';
 import Calendar from './components/Calendar';
 import CalendarTest from './components/CalendarTest';
 import Home from './components/Home';
