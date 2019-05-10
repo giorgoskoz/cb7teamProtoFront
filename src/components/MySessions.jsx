@@ -3,6 +3,7 @@ import { Jumbotron, Container, Button, Row } from 'react-bootstrap';
 import axios from 'axios';
 import $ from 'jquery';
 import { GlobalContext } from './GlobalContext';
+import MySessionsSession from './MySessionsSession';
 
 class MySessions extends React.Component {
 
@@ -27,10 +28,11 @@ class MySessions extends React.Component {
               data: JSON.stringify(gearArray)
           }).done(
             function( response ) {
-              that.setState({sessionsList: response})
+                console.log("soukse");
+                that.setState({sessionsList: response});
             }).catch(
                 function( response ) {
-                    that.setState({sessionsList: response})
+                    console.log(response);
                   })
     }
 
@@ -51,7 +53,9 @@ class MySessions extends React.Component {
                     </Container>
 
                 </Jumbotron>
-
+                {this.state.sessionsList.map(session =>{
+                    return <MySessionsSession key={session.id} session={session}></MySessionsSession>
+                })}
             </div>
         )
     }
