@@ -120,7 +120,7 @@ class App extends React.Component {
             <Route exact path="/" component={Home} />
             <Route path="/about" component={About} />
             <Route path="/calendar" component={Calendar} />
-            <Route path="/gear" component={Gear} />
+            <Route path="/gear" component={GearHeader} />
             <Route path="/mysessions" component={MySessions} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/crew" component={Topics} />
