@@ -69,25 +69,10 @@ class RegisterModal extends Component {
             }
           }
         ).then( response => {
-          console.log( response.data );
-        this.context.setToken ( response.data.alphanumeric );
-        this.context.setUser ( {
-          username: response.data.user.username,
-          firstname: response.data.user.firstname,
-          lastname: response.data.user.lastname,
-          email: response.data.user.email,
-          role: response.data.user.role
-        });
-        localStorage.setItem('token', response.data.alphanumeric);
-        localStorage.setItem('username', response.data.user.username);
-        localStorage.setItem('firstname', response.data.user.firstname);
-        localStorage.setItem('lastname', response.data.user.lastname);
-        localStorage.setItem('email', response.data.user.email);
-        localStorage.setItem('role', response.data.user.role);
-        })
-      }
+          alert("Registered sucessfully, you can now login");
+      })
     }
-  
+  }
     render() {
       const { showPasswordsDontMatch, target } = this.state;
       return (
