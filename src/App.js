@@ -70,11 +70,19 @@ class App extends React.Component {
       })
     };
   }
-  renderProtectedComponent = () => {
+  renderProtectedMySession = () => {
     if (this.state.user.role.id === 2 ) {
       return (props) => <MySessionsAdmin {...props}></MySessionsAdmin>;
     }else if( this.state.user.role.id === 1) {
       return  (props) => <MySessions {...props}/>;  
+    }else {
+      return (props) => <Redirect to='/notauthorized' />;
+    }
+  }
+
+  renderProtectedDashboard = () => {
+    if (this.state.user.role.id === 2 ) {
+      return (props) => <Dashboard {...props}></Dashboard>;
     }else {
       return (props) => <Redirect to='/notauthorized' />;
     }
@@ -118,8 +126,8 @@ class App extends React.Component {
             <Route path="/about" component={About} />
             <Route path="/calendar" component={Calendar} />
             <Route path="/gear" component={GearHeader} />
-            <Route path="/mysessions" render={this.renderProtectedComponent()} />
-            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/mysessions" render={this.renderProtectedMySession()} />
+            <Route path="/dashboard" render={this.renderProtectedDashboard()} />
             <Route path="/crew" component={Topics} />
             <Route path="/notauthorized" component={NotAuthorized} />
             <Footer></Footer>
