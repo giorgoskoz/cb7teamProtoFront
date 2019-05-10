@@ -2,8 +2,11 @@ import React from 'react';
 import { Jumbotron, Container, Button, Row } from 'react-bootstrap';
 import axios from 'axios';
 import $ from 'jquery';
+import { GlobalContext } from './GlobalContext';
 
 class MySessions extends React.Component {
+
+    static contextType = GlobalContext;
 
     constructor(props){
         super(props);

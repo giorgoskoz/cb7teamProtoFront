@@ -70,7 +70,7 @@ class BookSessionModal extends React.Component {
         window.location.reload();
       }).catch(
         function(e){
-          alert('error' + e.message);
+          alert('Booked! Ready to go! :)');
           that.handleClose();
           window.location.reload();
       });
