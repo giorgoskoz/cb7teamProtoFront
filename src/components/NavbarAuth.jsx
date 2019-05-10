@@ -51,14 +51,11 @@ class NavbarAuth extends React.Component {
               firstname: "",
               lastname: "",
               email: "",
-              role: ""
+              role: {"id":"",
+                   "name":""     
+              }
                             } );
-        localStorage.removeItem("token");
-        localStorage.removeItem("username");
-        localStorage.removeItem("firstname");
-        localStorage.removeItem("lastname");
-        localStorage.removeItem("email");
-        localStorage.removeItem("role");
+        localStorage.clear();
         axios.post('http://localhost:8080/login/logout',
             {
                 headers: {
