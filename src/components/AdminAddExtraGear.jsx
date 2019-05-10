@@ -76,7 +76,7 @@ class AdminAddExtraGear extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div><h2>AdminAddProvidedGear</h2></div>
+                <div><h2>Admin add extra gear</h2></div>
                 <form onSubmit={this.handleSubmit} className="pt-3 pb-2">
                     <div className="form-group row justify-content-center">
                         <label htmlFor="name" className="col-sm-3 col-form-label">Name</label>

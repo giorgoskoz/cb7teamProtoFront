@@ -21,7 +21,7 @@ class GearHeader extends React.Component{
                             </p>
                         </Container>
                     </Jumbotron>
-                    <Tabs defaultActiveKey="gear" id="uncontrolled-tab-example" className="mt-0 justify-content-end here" >
+                    <Tabs defaultActiveKey="extraGear" id="uncontrolled-tab-example" className="mt-0 justify-content-end here" >
                         <Tab eventKey="gear" title="Lights and Paraphernalia" to="/gear">
                             <Gear></Gear>
                         </Tab>
