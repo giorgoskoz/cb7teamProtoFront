@@ -68,10 +68,8 @@ class NavbarAuth extends React.Component {
         console.log(this.context.token);
         return (
             <NavDropdown title={this.context.user.username} id="nav-dropdown" alignRight="true" className="mx-3 d-flex align-items-center">
-                <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
-                <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>
                 <NavDropdown.Item eventKey="4.3" onClick={ this.handleMySessionsClick }>
-                    My sessions
+                {((this.context.user.role.id === 2) ? "All Sessions" : "My Sessions")}
                 </NavDropdown.Item>
                 {((this.context.user.role.id === 2) ? <NavDropdown.Item eventKey="4.4" onClick={ this.handleDashboardClick }>
                     Dashboard
