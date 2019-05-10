@@ -21,6 +21,7 @@ import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import NotAuthorized from './components/NotAuthorized';
 import MySessions from './components/MySessions';
+import MySessionsAdmin from './components/MySessionsAdmin';
 
 library.add(faUser);
 library.add(faLock);
@@ -69,27 +70,23 @@ class App extends React.Component {
       })
     };
   }
-
-  welcome(){
-    if(( this.state.token === null ) || (this.state.token === undefined)){
-      return(
-        <NavbarStranger></NavbarStranger>
-      );
-    } else {
-      return(
-        <NavDropdownExample/>
-      )
-    }
-  }
-
   renderProtectedComponent = () => {
-    if (this.state.token === null ) {
-      return (props) => <Redirect to='/notauthorized' />;
-    }else{
+    if (this.state.user.role.id === 2 ) {
+      return (props) => <MySessionsAdmin {...props}></MySessionsAdmin>;
+    }else if( this.state.user.role.id === 1) {
       return  (props) => <MySessions {...props}/>;  
+    }else {
+      return (props) => <Redirect to='/notauthorized' />;
     }
-    
   }
+    // if (this.state.user.role.id === 2 ) {
+    //   return (props) => <MySessionsAdmin {...props}></MySessionsAdmin>
+    // }
+    // if( this.state.user.role.id === 1){
+    //   return  (props) => <MySessions {...props}/>;
+    // }
+    // return (props) => <Redirect to='/notauthorized' />;
+    // }
 
   // componentDidMount(){
   //   this.setState({
