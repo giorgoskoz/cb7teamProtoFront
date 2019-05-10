@@ -82,13 +82,13 @@ class App extends React.Component {
     }
   }
 
-  renderProtectedComponent(ProtectedComponent) {
-    if (this.context.token === null || this.context.token === undefined ) {
+  renderProtectedComponent = () => {
+    if (this.state.token === null ) {
       return (props) => <Redirect to='/notauthorized' />;
+    }else{
+      return  (props) => <MySessions {...props}/>;  
     }
-    else {
-      return  (props) => <MySessions {...props} />;  
-    }
+    
   }
 
   // componentDidMount(){
@@ -121,7 +121,7 @@ class App extends React.Component {
             <Route path="/about" component={About} />
             <Route path="/calendar" component={Calendar} />
             <Route path="/gear" component={GearHeader} />
-            <Route path="/mysessions" component={MySessions} />
+            <Route path="/mysessions" render={this.renderProtectedComponent()} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/crew" component={Topics} />
             <Route path="/notauthorized" component={NotAuthorized} />
