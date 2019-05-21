@@ -61,6 +61,7 @@ class LoginModal extends Component {
           role: response.data.role
         };
         this.context.setUser ( {
+          id: response.data.user.id,
           username: response.data.user.username,
           firstname: response.data.user.firstName,
           lastname: response.data.user.lastName,

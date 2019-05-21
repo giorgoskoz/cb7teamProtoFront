@@ -2,7 +2,7 @@
     color: black;
 }
 
-.dailyBox:hover {
+.available:hover {
     border-width: 5px;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .own {
-    background-color: rgb(7, 155, 32);
+    /* background-color: rgb(7, 155, 32); */
     color: rgb(255, 255, 255);
     cursor: default;
 }

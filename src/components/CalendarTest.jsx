@@ -45,32 +45,42 @@ class CalendarTest extends React.Component{
             let sessionDate = moment( date ).set({ hour: parseInt(timeslotsTimes[i]), minute: 0, second: 0});
             let unique = moment( sessionDate ).format('YYYY-MM-DD HH') + ":00:00";
             let timeslotRow;
-            for (let j=0; j < this.state.sessionList.length; j++) {
-                if( (moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") === this.state.sessionList[ j ].date){
-                    timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox booked mx-1">BOOKED</div>
-                }
-            }
-            if(!timeslotRow){
-                timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox available mx-1" onClick={ this.handleSessionClick.bind(this, unique) }>{timeslots[i]}</div>
-            }
-            timeslotList.push(timeslotRow)
-            // for (let k=0; k<this.state.sessionList.length; k++){
-            //     ((this.context.user.id === this.state.sessionList[ k ].user.id) ? timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox own mx-1">THIS IS YOUR SESSION!</div> : timeslotRow = null);
-            //     // if( this.context.user.id === this.state.sessionList[ k ].user.id){
-            //     //     timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox own mx-1">THIS IS YOUR SESSION!</div>
-            //     // }
-            // }
-            // if(!timeslotRow){
-            //     for (let j=0; j < this.state.sessionList.length; j++) {
-            //         if( (moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") === this.state.sessionList[ j ].date){
-            //             timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox booked mx-1">BOOKED</div>
-            //         }
+            // for (let j=0; j < this.state.sessionList.length; j++) {
+            //     if( (moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") === this.state.sessionList[ j ].date){
+            //         timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox booked mx-1">BOOKED</div>
             //     }
             // }
             // if(!timeslotRow){
             //     timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox available mx-1" onClick={ this.handleSessionClick.bind(this, unique) }>{timeslots[i]}</div>
             // }
             // timeslotList.push(timeslotRow)
+
+            //for GREEN below
+
+            for (let k=0; k<this.state.sessionList.length; k++){
+                    
+
+                console.log('this.context.user.id: ' + this.context.user.id);
+                console.log('this.state.sessionList[ k ].user.id: ' + this.state.sessionList[ k ].user.id);
+                console.log('this.state.sessionList[ k ].date: ' + this.state.sessionList[ k ].date);
+                console.log('unique: ' + unique);
+
+                // (((this.context.user.id === this.state.sessionList[ k ].user.id) && (unique === this.state.sessionList[ k ].date)) ? timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox own mx-1">THIS IS YOUR SESSION!</div> : timeslotRow = undefined);
+                if((this.context.user.id === this.state.sessionList[ k ].user.id) && (unique === this.state.sessionList[ k ].date)){
+                    timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center text-center bg-primary dailyBox own mx-1">YOUR SESSION!</div>
+                }
+            }
+            if(!timeslotRow){
+                for (let j=0; j < this.state.sessionList.length; j++) {
+                    if( (moment(sessionDate).format('YYYY-MM-DD HH') + ":00:00") === this.state.sessionList[ j ].date){
+                        timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox booked mx-1">BOOKED</div>
+                    }
+                }
+            }
+            if(!timeslotRow){
+                timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox available mx-1" onClick={ this.handleSessionClick.bind(this, unique) }>{timeslots[i]}</div>
+            }
+            timeslotList.push(timeslotRow)
         };
         
         return <div key={ moment( date ).format("YYYY/MM/DD") } className="col-md-2 col-4 px-0 mx-0">{ timeslotList }</div>;
