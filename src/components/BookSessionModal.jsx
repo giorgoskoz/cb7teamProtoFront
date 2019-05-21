@@ -99,17 +99,23 @@ class BookSessionModal extends React.Component {
         <>
           <Modal show={ this.context.showBookModal } onHide={ this.handleClose } size="lg">
             <Modal.Header closeButton>
-              <Modal.Title>
+              {/* <Modal.Title>
                 <div className="row">
-                  <div className="col col-9">Modal heading</div>
-                  <div className="col col-3"><h3>{this.state.sessionPrice}€</h3></div>
+                  <div className="col col-9">Book your session</div>
                 </div>
-              </Modal.Title>
+              </Modal.Title> */}
             </Modal.Header>
             <Modal.Body>
               <h4 className="row px-4 mb-3 justify-content-center">The studio can be yours for 4 hours starting:</h4>
               <div className="row display-3 px-4 mb-3 justify-content-center">{this.context.sessionToBook}</div>
-              <div className="row justify-content-center mb-3"><h3>For a total price of: {this.state.sessionPrice}€</h3></div>
+              <div className="row justify-content-center mb-3"><h3>Studio + provided gear: {this.state.sessionDefaultPrice}€</h3></div>
+              
+
+              {/* <div className="row justify-content-center mb-3">
+                <Button variant="primary" onClick={this.handleBookSession}>
+                  Book Session!
+                </Button>
+              </div> */}
 
                 <h4 className="row justify-content-center mb-3"><strong>You can also rent the following gear:</strong></h4>
 
@@ -121,12 +127,15 @@ class BookSessionModal extends React.Component {
             </Modal.Body>
             <Modal.Footer>
               <div className="row">
+            <div className="col col-12 d-flex justify-content-end mt-3 mb-2"><h3>For a total price of: {this.state.sessionPrice}€</h3></div>
+              <div className="col col-12 d-flex justify-content-end">
                 <Button variant="secondary" onClick={this.handleClose}>
                   Close
                 </Button>
                 <Button variant="primary" onClick={this.handleBookSession}>
                   Book Session!
                 </Button>
+              </div>
               </div>
             </Modal.Footer>
           </Modal>

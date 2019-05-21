@@ -58,13 +58,6 @@ class CalendarTest extends React.Component{
             //for GREEN below
 
             for (let k=0; k<this.state.sessionList.length; k++){
-                    
-
-                console.log('this.context.user.id: ' + this.context.user.id);
-                console.log('this.state.sessionList[ k ].user.id: ' + this.state.sessionList[ k ].user.id);
-                console.log('this.state.sessionList[ k ].date: ' + this.state.sessionList[ k ].date);
-                console.log('unique: ' + unique);
-
                 // (((this.context.user.id === this.state.sessionList[ k ].user.id) && (unique === this.state.sessionList[ k ].date)) ? timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox own mx-1">THIS IS YOUR SESSION!</div> : timeslotRow = undefined);
                 if((this.context.user.id === this.state.sessionList[ k ].user.id) && (unique === this.state.sessionList[ k ].date)){
                     timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center text-center bg-primary dailyBox own mx-1">YOUR SESSION!</div>

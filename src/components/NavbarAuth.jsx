@@ -3,6 +3,7 @@ import { Navbar, NavDropdown } from 'react-bootstrap';
 import { GlobalContext } from './GlobalContext';
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
+import './NavbarAuth.css';
 
 class NavbarAuth extends React.Component {
 
