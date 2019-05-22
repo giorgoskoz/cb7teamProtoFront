@@ -43,7 +43,7 @@
 .own {
     /* background-color: rgb(7, 155, 32); */
     color: rgb(255, 255, 255);
-    cursor: default;
+    cursor: pointer;
 }
 
 .fa-arrow-alt-circle-left, .fa-arrow-alt-circle-right {

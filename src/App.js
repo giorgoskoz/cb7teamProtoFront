@@ -22,6 +22,7 @@ import Dashboard from './components/Dashboard';
 import NotAuthorized from './components/NotAuthorized';
 import MySessions from './components/MySessions';
 import MySessionsAdmin from './components/MySessionsAdmin';
+import YourSessionModal from './components/YourSessionModal';
 
 library.add(faUser);
 library.add(faLock);
@@ -67,6 +68,10 @@ class App extends React.Component {
       showBookModal: false,
       setShowBookSessionModal: ( value ) => this.setState({
           showBookModal: value
+      }),
+      showYourSessionModal: false,
+      setShowYourSessionModal: ( value ) => this.setState({
+          showYourSessionModal: value
       })
     };
   }
@@ -120,6 +125,7 @@ class App extends React.Component {
             <LoginModal></LoginModal>
             <RegisterModal></RegisterModal>
             <BookSessionModal></BookSessionModal>
+            <YourSessionModal></YourSessionModal>
             <NavDropdownExample></NavDropdownExample>
     
             <Route exact path="/" component={Home} />

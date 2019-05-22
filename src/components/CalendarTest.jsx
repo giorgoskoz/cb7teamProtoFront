@@ -25,6 +25,7 @@ class CalendarTest extends React.Component{
         this.handleNext = this.handleNext.bind(this);
         this.getAvailableSessions = this.getAvailableSessions.bind(this);
         this.handleSessionClick = this.handleSessionClick.bind(this);
+        this.handleYourSessionClick = this.handleYourSessionClick.bind(this);
     }
 
     sixDays( date ){
@@ -60,7 +61,7 @@ class CalendarTest extends React.Component{
             for (let k=0; k<this.state.sessionList.length; k++){
                 // (((this.context.user.id === this.state.sessionList[ k ].user.id) && (unique === this.state.sessionList[ k ].date)) ? timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center dailyBox own mx-1">THIS IS YOUR SESSION!</div> : timeslotRow = undefined);
                 if((this.context.user.id === this.state.sessionList[ k ].user.id) && (unique === this.state.sessionList[ k ].date)){
-                    timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center text-center bg-primary dailyBox own mx-1">YOUR SESSION!</div>
+                    timeslotRow = <div key = {unique} className="row justify-content-center d-flex align-items-center text-center bg-primary dailyBox own mx-1" onClick={ this.handleYourSessionClick.bind(this, unique) }>YOUR SESSION!</div>
                 }
             }
             if(!timeslotRow){
@@ -83,6 +84,13 @@ class CalendarTest extends React.Component{
         console.log( unique );
         this.context.setShowBookSessionModal( true );
         this.context.setSessionToBook( unique );
+    
+    }
+    handleYourSessionClick( unique ){
+        console.log( unique );
+        console.log('your clank')
+        this.context.setShowYourSessionModal( true );
+        // this.context.setYourSessionToBook( unique );
     }
 
     handlePrev(){
