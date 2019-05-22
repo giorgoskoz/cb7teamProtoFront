@@ -117,6 +117,9 @@ class YourSessionModal extends React.Component {
                 <Button variant="secondary" onClick={this.handleClose}>
                   Close
                 </Button>
+                <Button variant="dark" onClick={ null }>
+                  Go to My Sessions
+                </Button>
               </div>
             </Modal.Footer>
           </Modal>

@@ -27,7 +27,7 @@
 
 .available:hover {
     cursor: pointer;
-    border-width: 5px;
+    border-width: 3px;
 }
 
 .available {
@@ -44,6 +44,11 @@
     /* background-color: rgb(7, 155, 32); */
     color: rgb(255, 255, 255);
     cursor: pointer;
+}
+
+.own:hover {
+    border-width: 3px;
+    border-color: #5da2fb;
 }
 
 .fa-arrow-alt-circle-left, .fa-arrow-alt-circle-right {
