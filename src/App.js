@@ -69,6 +69,10 @@ class App extends React.Component {
       setShowBookSessionModal: ( value ) => this.setState({
           showBookModal: value
       }),
+      yourSession: null,
+      setYourSession: ( value ) => this.setState({
+          yourSession: value
+      }),
       showYourSessionModal: false,
       setShowYourSessionModal: ( value ) => this.setState({
           showYourSessionModal: value

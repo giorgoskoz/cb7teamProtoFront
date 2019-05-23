@@ -88,7 +88,8 @@ class CalendarTest extends React.Component{
     }
     handleYourSessionClick( unique ){
         console.log( unique );
-        console.log('your clank')
+        console.log('your clank');
+        this.context.setYourSession( unique );
         this.context.setShowYourSessionModal( true );
         // this.context.setYourSessionToBook( unique );
     }

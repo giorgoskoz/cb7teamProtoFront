@@ -5,6 +5,7 @@ import axios from 'axios';
 import Gear from './Gear';
 import BookSessionModalGear from './BookSessionModalGear';
 import $ from 'jquery';
+import MySessionsSession from './MySessionsSession';
 
 class YourSessionModal extends React.Component {
 
@@ -20,6 +21,9 @@ class YourSessionModal extends React.Component {
       this.removeSelectedGear = this.removeSelectedGear.bind(this);
   
       this.state = {
+        session: {date: "",
+                  totalPrice: ""          
+        },
         sessionDefaultPrice: 50,
         sessionPrice: 50,
         extraGear: [],
@@ -85,10 +89,10 @@ class YourSessionModal extends React.Component {
     }
 
     componentDidMount(){
-        // axios.get('http://localhost:8080/gear/all-extra'
-        // ).then( response => {
-        //     this.setState({extraGear: response.data})
-        // })
+        axios.get('http://localhost:8080/' + this.context.yourSession
+        ).then( response => {
+            this.setState({session: response.data})
+        })
     }
   
     render() {
@@ -100,6 +104,7 @@ class YourSessionModal extends React.Component {
             </Modal.Header>
             <Modal.Body>
                 <div className="display-4">BOOKED SESSION INFO HERE</div>
+                <MySessionsSession session={ this.state.session }></MySessionsSession>
               {/* <h4 className="row px-4 mb-3 justify-content-center">The studio can be yours for 4 hours starting:</h4>
               <div className="row display-3 px-4 mb-3 justify-content-center">{this.context.sessionToBook}</div>
               <div className="row justify-content-center mb-3"><h3>For a total price of: {this.state.sessionPrice}€</h3></div>
