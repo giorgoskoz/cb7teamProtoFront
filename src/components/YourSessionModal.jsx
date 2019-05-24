@@ -63,7 +63,8 @@ class YourSessionModal extends React.Component {
         contentType: "application/json; charset=utf-8",                       
         type: 'post',         
         headers: {'X-KLICKS-AUTH': this.context.token },
-        data: JSON.stringify(gearArray)
+        data: JSON.stringify(gearArray),
+        
     }).done(
       function() {
         alert('Booked! Ready to go!');
@@ -88,11 +89,19 @@ class YourSessionModal extends React.Component {
       // );
     }
 
-    componentDidMount(){
-        axios.get('http://localhost:8080/' + this.context.yourSession
-        ).then( response => {
-            this.setState({session: response.data})
-        })
+    componentDidUpdate(){
+      $.ajax({
+        url: 'http://localhost:8080/sessions/by-date/' + this.context.yourSession,
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",                       
+        type: 'get',         
+        headers: {'X-KLICKS-AUTH': this.context.token },
+        success: (response) => {
+            this.setState({ session: response });
+        },
+        error: (response) => {
+          console.log(response)
+        }});
     }
   
     render() {
